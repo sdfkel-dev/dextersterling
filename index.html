@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dexter Sterling · Westfield University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#faf8f4;color:#1a1830;font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;outline:none;border:none;background:none}
+img{display:block}a{text-decoration:none;color:inherit}
+
+:root{
+  --navy:   #0d1b3e;
+  --navy2:  #162448;
+  --crim:   #9b1a2e;
+  --crim2:  #c02138;
+  --crim-l: rgba(155,26,46,.08);
+  --gold:   #b8965a;
+  --gold2:  #d4ac72;
+  --gold-l: rgba(184,150,90,.18);
+  --cream:  #faf8f4;
+  --paper:  #f3efe6;
+  --paper2: #ebe5d8;
+  --paper3: #e2dace;
+  --ink:    #1a1830;
+  --ink2:   #35324e;
+  --ink3:   #5c5878;
+  --dim:    #9592a8;
+  --lne:    rgba(26,24,48,.09);
+  --lne2:   rgba(26,24,48,.05);
+  --white:  #ffffff;
+}
+
+/* ════ INTRO ════════════════════════════════════════ */
+#intro{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;cursor:pointer;
+}
+/* Crosshatch bg */
+#intro::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 28px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 28px);
+}
+.intro-paper{
+  position:relative;z-index:2;
+  width:min(580px,92vw);
+  background:var(--white);
+  border-top:6px solid var(--crim);
+  padding:0;
+  box-shadow:0 32px 100px rgba(0,0,0,.55);
+}
+.intro-paper-head{
+  padding:18px 36px 14px;
+  border-bottom:2px solid var(--ink);
+  display:flex;align-items:baseline;justify-content:space-between;
+}
+.intro-paper-name{
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:900;
+  color:var(--navy);letter-spacing:.06em;
+}
+.intro-paper-meta{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.3em;
+  color:var(--dim);text-transform:uppercase;
+}
+.intro-paper-body{padding:28px 36px 24px;background:#ffffff}
+.intro-text{
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;
+  line-height:2.0;color:#0f0e1a;min-height:88px;font-weight:500;
+}
+.intro-cur{
+  display:inline-block;width:2px;height:.9em;
+  background:var(--crim);vertical-align:text-bottom;
+  animation:blink .65s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.intro-paper-foot{
+  border-top:1px solid var(--lne);padding:16px 36px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.intro-xoxo{
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
+  color:var(--crim);letter-spacing:.12em;
+  opacity:0;transform:translateY(6px);transition:opacity .45s,transform .45s;
+}
+.intro-xoxo.show{opacity:1;transform:none}
+.intro-gg{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.36em;
+  color:var(--dim);text-transform:uppercase;
+  opacity:0;transition:opacity .45s .25s;
+}
+.intro-gg.show{opacity:1}
+.intro-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.32em;
+  color:rgba(255,255,255,.18);white-space:nowrap;z-index:3;
+  animation:phint 2.4s 3s ease-in-out infinite;
+}
+@keyframes phint{0%,100%{opacity:.18}50%{opacity:.55}}
+.intro-veil{
+  position:absolute;inset:0;z-index:10;background:var(--navy);
+  clip-path:inset(100% 0 0 0);transition:clip-path .85s cubic-bezier(.77,0,.18,1);
+}
+.intro-veil.close{clip-path:inset(0 0 0 0)}
+#intro.out{opacity:0;pointer-events:none;transition:opacity .4s .7s}
+
+/* ════ SITE ══════════════════════════════════════════ */
+#site{opacity:0;transition:opacity 1s .2s}
+#site.on{opacity:1}
+
+/* ════ SCHOOL BANNER ════════════════════════════════ */
+.school-banner{
+  background:var(--navy);
+  padding:0 60px;height:46px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;
+  border-bottom:3px solid var(--crim);
+}
+.sb-left{display:flex;align-items:center;gap:16px}
+.sb-shield{
+  width:22px;height:26px;position:relative;
+  background:var(--crim);clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:8px;font-weight:900;color:var(--white);
+  padding-bottom:4px;
+}
+.sb-name{
+  font-family:'Playfair Display',serif;font-size:13px;font-weight:700;
+  color:var(--white);letter-spacing:.08em;
+}
+.sb-motto{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.2em;
+  color:rgba(255,255,255,.28);font-style:italic;
+}
+.sb-right{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;
+  color:rgba(255,255,255,.3);text-transform:uppercase;
+}
+
+/* ════ HERO ══════════════════════════════════════════ */
+.hero{
+  background:var(--navy2);
+  position:relative;overflow:hidden;
+  /* Plaid-ish pattern */
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 48px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 48px),
+    repeating-linear-gradient(0deg,rgba(155,26,46,.06) 0,rgba(155,26,46,.06) 2px,transparent 2px,transparent 144px),
+    repeating-linear-gradient(90deg,rgba(155,26,46,.06) 0,rgba(155,26,46,.06) 2px,transparent 2px,transparent 144px);
+}
+/* Corner crimson accent */
+.hero-accent{
+  position:absolute;top:0;left:0;width:6px;height:100%;background:var(--crim);z-index:1;
+}
+
+.hero-inner{
+  display:grid;grid-template-columns:1fr 440px;
+  min-height:480px;position:relative;z-index:2;
+}
+.hero-left{
+  padding:80px 56px 72px 72px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid rgba(255,255,255,.07);
+}
+.hero-right{position:relative;overflow:hidden;background:rgba(0,0,0,.12)}
+
+.hero-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.36em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:24px;
+}
+.hero-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold);opacity:.7}
+
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,7.5vw,96px);font-weight:900;
+  color:var(--white);letter-spacing:.05em;line-height:.92;
+  margin-bottom:12px;
+}
+/* Underline accent on second line */
+.hero-name span{
+  display:block;position:relative;width:fit-content;
+}
+.hero-name span::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:3px;background:var(--crim);
+}
+.hero-sub{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.42em;
+  color:rgba(255,255,255,.22);margin-bottom:48px;
+}
+
+/* Stat pills */
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:38px}
+.pill{
+  display:flex;flex-direction:column;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  padding:10px 18px;
+}
+.pill-k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.28em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:4px}
+.pill-v{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.8)}
+.pill.hot .pill-v{color:var(--crim2)}
+
+/* Academic badge */
+.acad-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(155,26,46,.18);border:1px solid rgba(155,26,46,.35);
+  padding:9px 18px;margin-bottom:36px;
+}
+.acad-badge-dept{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.04em}
+.acad-badge-yr{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
+  color:rgba(255,255,255,.45);
+}
+.acad-badge-sep{width:1px;height:16px;background:rgba(255,255,255,.15)}
+
+/* Play btn */
+.hero-play{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--crim);color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.12em;padding:13px 30px;
+  transition:background .2s,transform .15s;
+}
+.hero-play:hover{background:var(--crim2);transform:translateX(3px)}
+
+/* Hero photo */
+.hero-photo{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:flex-end}
+.hero-photo img{height:100%;width:auto;object-fit:cover;object-position:top center;display:block}
+.hero-photo-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.hero-photo-ph span{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,.18);text-align:center;line-height:2}
+.hero-right::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to right,var(--navy2) 0%,rgba(22,36,72,.2) 28%),
+             linear-gradient(to top,var(--navy2) 0%,transparent 18%);
+}
+
+/* ════ TAB NAV ═══════════════════════════════════════ */
+.tabnav-wrap{
+  background:var(--white);
+  border-bottom:2px solid var(--lne);
+  position:sticky;top:46px;z-index:100;
+}
+.tabnav{
+  display:flex;padding:0 72px;max-width:1400px;margin:0 auto;
+  border-bottom:2px solid var(--navy);
+  margin-bottom:-2px;
+}
+.tbtn{
+  height:48px;padding:0 26px;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.3em;
+  color:var(--dim);text-transform:uppercase;
+  position:relative;transition:color .18s;border-bottom:3px solid transparent;
+  margin-bottom:-2px;
+}
+.tbtn.active{color:var(--navy);font-weight:500;border-bottom-color:var(--crim)}
+.tbtn:hover{color:var(--ink2)}
+
+/* ════ PANELS ════════════════════════════════════════ */
+.panel{display:none}
+.panel.active{display:block;animation:pin .28s ease}
+@keyframes pin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ════ WORLD TAB ════════════════════════════════════ */
+.world-body{max-width:1300px;margin:0 auto;padding:64px 72px 110px}
+
+/* Newspaper-style opening quote */
+.world-dropcap{
+  display:grid;grid-template-columns:auto 1fr;gap:0 24px;
+  align-items:start;margin-bottom:60px;
+}
+.world-dropcap-letter{
+  font-family:'Playfair Display',serif;font-size:96px;font-weight:900;
+  color:var(--crim);line-height:.85;float:left;
+  margin-right:4px;margin-top:4px;
+}
+.world-dropcap-text p{
+  font-family:'Noto Serif KR',serif;font-size:15.5px;line-height:2.65;
+  color:var(--ink2);margin-bottom:20px;word-break:keep-all;
+}
+.world-dropcap-text p:last-child{margin-bottom:0}
+.world-dropcap-text strong{font-weight:700;color:var(--ink)}
+.world-dropcap-text em{font-style:normal;color:var(--crim);font-weight:600}
+
+/* Bet pullquote */
+.bet-pull{
+  background:var(--navy);
+  margin:36px 0;padding:30px 36px;
+  border-left:5px solid var(--gold);
+  position:relative;overflow:hidden;
+}
+.bet-pull::after{
+  content:'"';position:absolute;right:24px;bottom:-20px;
+  font-family:'Playfair Display',serif;font-size:120px;font-weight:900;
+  color:rgba(255,255,255,.04);line-height:1;
+}
+.bet-who{
+  font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.32em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.bet-line{
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;
+  color:rgba(250,248,244,.75);line-height:1.9;
+}
+.bet-line strong{font-style:normal;font-weight:700;color:var(--white)}
+
+/* Section rule */
+.sec-rule{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:28px;
+}
+.sec-rule-line{flex:1;height:1px;background:var(--lne)}
+.sec-rule-label{
+  font-family:'Playfair Display',serif;font-size:11px;font-weight:700;
+  letter-spacing:.44em;color:var(--crim);text-transform:uppercase;
+}
+.sec-rule-line2{width:40px;height:1px;background:var(--lne)}
+
+/* World cards — 3-col magazine */
+.world-cards{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--lne);border:1px solid var(--lne);
+  margin-bottom:60px;
+  box-shadow:0 2px 16px rgba(26,24,48,.06);
+}
+.wcard{background:var(--paper);padding:28px 30px;transition:background .15s}
+.wcard:hover{background:var(--paper2)}
+.wcard.full{grid-column:1/-1}
+.wcard-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.wcard-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:12px;letter-spacing:.04em}
+.wcard-text{font-family:'Noto Serif KR',serif;font-size:15px;line-height:2.3;color:var(--ink3);word-break:keep-all}
+.wcard-text strong{color:var(--ink);font-weight:600}
+
+/* NPC card */
+.npc-row{
+  background:var(--paper);border:1px solid var(--lne);
+  display:grid;grid-template-columns:120px 1fr;gap:32px;
+  padding:32px 36px;margin-bottom:60px;
+  box-shadow:0 2px 8px rgba(26,24,48,.05);
+}
+.npc-img{width:120px;aspect-ratio:3/4;background:var(--paper2);border:1px solid var(--lne);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.npc-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.npc-img-ph{font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:.14em;color:var(--dim);text-align:center;line-height:2}
+.npc-role{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--crim);text-transform:uppercase;margin-bottom:6px}
+.npc-name{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.npc-en{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:8px}
+/* Academic ribbon */
+.npc-acad{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--crim-l);border:1px solid rgba(155,26,46,.18);
+  padding:4px 12px;margin-bottom:12px;
+}
+.npc-acad span{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--crim)}
+.npc-acad small{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--dim)}
+.npc-desc{font-family:'Noto Serif KR',serif;font-size:15px;line-height:2.2;color:var(--ink3);word-break:keep-all}
+
+/* ════ CAMPUS MAP ════════════════════════════════════ */
+.map-wrap{border:1px solid var(--lne);overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(26,24,48,.07)}
+.map-head{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.map-head-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--white);letter-spacing:.06em}
+.map-head-sub{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.28em;color:rgba(255,255,255,.28);text-transform:uppercase}
+.map-body{position:relative;background:#ede8df;height:560px;overflow:hidden}
+.map-paths{position:absolute;inset:0;pointer-events:none}
+.map-paths svg{width:100%;height:100%}
+.gs{position:absolute;border-radius:2px}
+.gs-quad{background:rgba(100,145,75,.18);width:22%;height:18%;left:38%;top:38%}
+.gs-south{background:rgba(100,145,75,.14);width:18%;height:12%;left:28%;top:68%}
+.gs-north{background:rgba(100,145,75,.13);width:22%;height:10%;left:37%;top:6%}
+.map-pond{position:absolute;left:13%;top:55%;width:6%;height:5%;border-radius:50%;background:rgba(100,140,180,.22);border:1px solid rgba(100,140,180,.35)}
+.map-pond-lbl{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:6px;letter-spacing:.12em;color:rgba(26,24,48,.4);white-space:nowrap}
+.sterling-zone{position:absolute;top:3%;left:12%;right:12%;height:20%;border:1.5px dashed rgba(184,150,90,.55);border-radius:2px}
+.sterling-zone-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:.3em;color:rgba(184,150,90,.7);text-transform:uppercase;white-space:nowrap}
+.tree{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(80,120,60,.22)}
+.tree.lg{width:11px;height:11px}.tree.sm{width:6px;height:6px}
+.bld{position:absolute;cursor:pointer}
+.bld-body{display:flex;align-items:center;justify-content:center;border:1px solid rgba(26,24,48,.12);transition:outline .15s,transform .15s;position:relative}
+.bld:hover .bld-body{outline:2px solid var(--crim);transform:scale(1.05);z-index:5}
+.bld.lux:hover .bld-body{outline-color:var(--gold)}
+.bld-lbl{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;color:rgba(26,24,48,.6);font-weight:600}
+.t-ac{background:#c8bfb0}.t-do{background:#bfa898}.t-lx{background:#c5b99a;border:1px solid rgba(154,123,79,.3)}.t-so{background:#a8978a}.t-sp{background:#b8b0a2}.t-gt{background:#a09888}
+.bld-tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--navy);color:var(--white);padding:6px 12px;white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;pointer-events:none;opacity:0;transition:opacity .15s;z-index:20}
+.bld:hover .bld-tip{opacity:1}
+.bld-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--navy)}
+.map-compass{position:absolute;bottom:14px;right:14px;width:36px;height:36px;z-index:5}
+.map-info{position:absolute;left:12px;bottom:12px;background:var(--white);border:1px solid var(--lne);border-left:3px solid var(--crim);padding:16px 20px;max-width:260px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10}
+.map-info.show{opacity:1;pointer-events:auto}
+.map-info-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.map-info-type{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--crim);margin-bottom:8px;text-transform:uppercase}
+.map-info-desc{font-family:'Noto Serif KR',serif;font-size:13.5px;line-height:2.0;color:var(--ink3)}
+.map-info-close{position:absolute;top:8px;right:10px;font-size:11px;color:var(--dim);cursor:pointer}
+.map-foot{background:var(--paper);padding:11px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid var(--lne)}
+.lgd{display:flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--ink3)}
+.lgd-dot{width:10px;height:10px;border-radius:1px;flex-shrink:0}
+
+/* ════ CHARACTER TAB ════════════════════════════════ */
+.char-body{max-width:1280px;margin:0 auto;padding:64px 72px 110px}
+
+/* Yearbook-style hero card */
+.yb-card{
+  display:grid;grid-template-columns:300px 1fr;
+  gap:0;border:2px solid var(--navy);
+  margin-bottom:40px;
+  box-shadow:6px 6px 0 var(--navy);
+  align-items:start;
+}
+.yb-photo-col{
+  background:var(--paper2);border-right:2px solid var(--navy);
+}
+.yb-photo{width:100%;aspect-ratio:4/5;overflow:hidden;background:var(--paper3);}
+.yb-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .7s}
+.yb-photo:hover img{transform:scale(1.04)}
+.yb-photo-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.yb-photo-ph span{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--dim);line-height:2}
+.yb-sub-photos{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--lne)}
+.yb-sub{aspect-ratio:1;overflow:hidden;background:var(--paper3);border-right:1px solid var(--lne);display:flex;align-items:center;justify-content:center}
+.yb-sub:last-child{border-right:none}
+.yb-sub img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s}
+.yb-sub:hover img{transform:scale(1.06)}
+.yb-sub-ph{font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:.14em;color:var(--dim);text-align:center}
+.yb-cap{padding:8px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;border-top:1px solid var(--lne)}
+
+/* Yearbook info side */
+.yb-info{padding:32px 36px}
+/* School ID strip */
+.yb-id-strip{
+  background:var(--navy);margin:-32px -36px 28px;padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:3px solid var(--crim);
+}
+.yb-id-strip-l{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.yb-id-strip-r{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--gold)}
+/* Name */
+.yb-name{font-family:'Playfair Display',serif;font-size:clamp(36px,4.5vw,56px);font-weight:900;color:var(--navy);line-height:1;margin-bottom:6px;letter-spacing:.04em}
+.yb-name-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.38em;color:var(--dim);margin-bottom:22px;font-weight:300}
+/* Acad band */
+.yb-acad{
+  display:flex;align-items:center;gap:0;
+  border:1px solid var(--lne);margin-bottom:24px;overflow:hidden;
+}
+.yb-acad-cell{padding:10px 16px;border-right:1px solid var(--lne)}
+.yb-acad-cell:last-child{border-right:none;flex:1}
+.yb-acad-k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:5px}
+.yb-acad-v{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--navy)}
+
+/* Stat grid */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--lne);margin-bottom:20px}
+.sc{background:var(--paper);padding:16px 18px;border-right:1px solid var(--lne);border-bottom:1px solid var(--lne);transition:background .15s}
+.sc:hover{background:var(--paper2)}
+.sc:nth-child(even){border-right:none}
+.sc.full{grid-column:1/-1;border-right:none}
+.sk{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:7px}
+.sv{font-family:'DM Sans',sans-serif;font-size:14.5px;font-weight:500;color:var(--ink2);line-height:1.85;word-break:keep-all}
+.sv strong{font-weight:700;color:var(--navy)}
+.chips{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;padding:4px 13px;border:1px solid var(--lne);color:var(--ink3);background:var(--cream)}
+
+/* Alert boxes */
+.alert{background:var(--paper);border:1px solid var(--lne);border-left:4px solid var(--gold);padding:16px 20px;margin-bottom:9px}
+.alert.red{border-left-color:var(--crim)}
+.alert-k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.alert.red .alert-k{color:var(--crim)}
+.alert p{font-family:'Noto Serif KR',serif;font-size:13.5px;line-height:2.0;color:var(--ink3);word-break:keep-all}
+.alert p strong{color:var(--ink);font-weight:700}
+
+.play-btn{
+  display:inline-flex;align-items:center;gap:12px;margin-top:28px;
+  background:var(--navy);color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.12em;padding:13px 30px;
+  transition:background .2s,transform .15s;
+}
+.play-btn:hover{background:var(--crim);transform:translateX(3px)}
+
+/* ════ ETC TAB ═══════════════════════════════════════ */
+.etc-body{max-width:960px;margin:0 auto;padding:64px 72px 110px}
+.etc-hd{margin-bottom:14px}
+.etc-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px;letter-spacing:.04em}
+.etc-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--crim);text-transform:uppercase}
+
+.tog-btn{
+  width:100%;background:var(--paper);border:1px solid var(--lne);
+  padding:14px 20px;display:flex;align-items:center;justify-content:space-between;
+  transition:background .15s;
+}
+.tog-btn:hover{background:var(--paper2)}
+.tog-btn.open{border-bottom:none}
+.tog-label{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink)}
+.tog-caret{font-size:9px;color:var(--dim);transition:transform .25s}
+.tog-btn.open .tog-caret{transform:rotate(180deg)}
+.tog-body{display:none;border:1px solid var(--lne);border-top:none;padding:24px 28px;background:var(--paper);margin-bottom:48px}
+.tog-body.open{display:block}
+.ui-text{font-family:'Noto Serif KR',serif;font-size:15px;line-height:2.4;color:var(--ink2);word-break:keep-all}
+.ui-text em{font-style:italic;color:var(--dim)}
+
+/* Text message bubble */
+.ui-text .sms{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--paper2);border:1px solid var(--lne);
+  border-radius:16px 16px 16px 4px;
+  padding:9px 16px;margin:2px 0;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--navy);
+  box-shadow:0 1px 4px rgba(26,24,48,.07);
+}
+.ui-text .sms::before{content:'💬';font-size:10px;flex-shrink:0;opacity:.55}
+
+.model-list{margin-top:0}
+.mi{margin-bottom:3px;border:1px solid var(--lne);background:var(--paper)}
+.mi-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:15px 22px;cursor:pointer;text-align:left;transition:background .15s;
+}
+.mi-btn:hover{background:var(--paper2)}
+.mi-btn.open{background:var(--paper2);border-bottom:1px solid var(--lne)}
+.mi-meta{display:flex;align-items:center;gap:11px}
+.mi-badge{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:2px 9px;border:1px solid var(--lne);color:var(--ink3)}
+.mi-name{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.13em;color:var(--navy);font-weight:500}
+.mi-caret{font-size:10px;color:var(--dim);transition:transform .3s}
+.mi-btn.open .mi-caret{transform:rotate(180deg)}
+.mi-body{display:none;padding:28px 32px}
+.mi-body.open{display:block}
+
+/* Output text */
+.out{font-family:'Noto Serif KR',serif;font-size:15px;line-height:2.45;color:var(--ink2);word-break:keep-all}
+.out p{margin-bottom:13px}
+.out p:last-child{margin-bottom:0}
+.out em{color:var(--dim);font-style:italic}
+.out strong{color:var(--ink);font-weight:700}
+/* "" 대사 */
+.out .dlg{
+  display:block;background:rgba(155,26,46,.04);border-left:3px solid var(--crim);
+  padding:12px 20px;margin:4px 0;
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;font-style:italic;
+  color:var(--navy);line-height:1.95;
+}
+/* [] 문자 */
+.out .sms{display:flex;align-items:flex-start;gap:10px;margin:8px 0}
+.out .sms-bubble{
+  background:var(--paper2);border:1px solid var(--lne);
+  border-radius:16px 16px 16px 4px;padding:10px 18px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--navy);line-height:1.7;
+  max-width:85%;box-shadow:0 1px 3px rgba(26,24,48,.07);
+}
+.out .sms-bubble.sent{background:var(--navy2);color:var(--white);border-radius:16px 16px 4px 16px;border-color:transparent}
+.out .sms-icon{flex-shrink:0;font-size:14px;margin-top:4px;opacity:.5}
+
+/* ════ FOOTER ════════════════════════════════════════ */
+footer{
+  background:var(--navy);padding:20px 72px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:3px solid var(--crim);
+}
+.fl,.fr{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.26em;color:rgba(255,255,255,.22);text-transform:uppercase}
+.fm{display:flex;gap:8px;align-items:center}
+.fd{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.15)}
+.fd.on{background:rgba(155,26,46,.5)}
+
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr}.hero-right{display:none}
+  .char-body,.world-body,.etc-body{padding-left:24px;padding-right:24px}
+  .yb-card{grid-template-columns:1fr}.yb-photo-col{border-right:none;border-bottom:2px solid var(--navy)}
+  .world-cards{grid-template-columns:1fr}
+  .tabnav,.school-banner{padding-left:24px;padding-right:24px}
+  footer{padding:18px 24px}
+}
+
+/* ════ GOSSIP POPUP ══════════════════════════════════ */
+.gossip-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--crim);color:var(--white);
+  font-family:'Playfair Display',serif;font-size:13px;font-weight:700;
+  letter-spacing:.06em;padding:10px 22px;
+  cursor:pointer;border:none;
+  transition:background .18s,transform .15s,box-shadow .18s;
+  margin-top:4px;
+  position:relative;
+  animation:gossipPulse 2.2s 1.2s ease-in-out infinite;
+}
+.gossip-btn::before{content:'💋';font-size:12px}
+.gossip-btn::after{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border:2px solid rgba(155,26,46,.35);
+  animation:gossipRing 2.2s 1.2s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes gossipPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(155,26,46,.45),0 2px 8px rgba(155,26,46,.2)}
+  50%{box-shadow:0 0 0 8px rgba(155,26,46,0),0 4px 16px rgba(155,26,46,.3)}
+}
+@keyframes gossipRing{
+  0%{opacity:.7;transform:scale(1)}
+  80%{opacity:0;transform:scale(1.18)}
+  100%{opacity:0;transform:scale(1.18)}
+}
+.gossip-btn:hover{background:var(--crim2);transform:translateY(-1px);animation:none}
+.gossip-btn:hover::after{display:none}
+
+/* 버튼 아래 힌트 텍스트 */
+.gossip-hint{
+  display:block;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;
+  color:var(--crim);text-transform:uppercase;
+  margin-top:6px;text-align:right;
+  opacity:.6;
+  animation:hintFade 2.2s 1.2s ease-in-out infinite;
+}
+@keyframes hintFade{0%,100%{opacity:.55}50%{opacity:.85}}
+
+.gossip-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(13,27,62,.82);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  padding:24px;
+}
+.gossip-overlay.open{opacity:1;pointer-events:auto}
+.gossip-modal{
+  background:var(--white);
+  width:min(660px,96vw);max-height:88vh;
+  display:flex;flex-direction:column;
+  border-top:5px solid var(--crim);
+  box-shadow:0 28px 80px rgba(0,0,0,.55);
+  transform:translateY(12px);transition:transform .3s;
+}
+.gossip-overlay.open .gossip-modal{transform:none}
+.gossip-modal-head{
+  padding:16px 28px 14px;
+  border-bottom:2px solid var(--ink);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.gossip-modal-name{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:900;
+  color:var(--navy);letter-spacing:.05em;
+}
+.gossip-modal-meta{
+  font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.28em;
+  color:var(--dim);text-transform:uppercase;
+}
+.gossip-modal-close{
+  background:none;border:none;cursor:pointer;
+  font-size:16px;color:var(--dim);padding:4px 8px;
+  transition:color .15s;line-height:1;
+}
+.gossip-modal-close:hover{color:var(--crim)}
+.gossip-modal-body{
+  overflow-y:auto;flex:1;
+}
+.gossip-item{
+  padding:28px 36px;
+  border-bottom:1px solid rgba(26,24,48,.07);
+}
+.gossip-item:last-child{border-bottom:none}
+.gossip-item-num{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.42em;
+  color:var(--crim);text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.gossip-item-num::after{content:'';flex:1;height:1px;background:rgba(155,26,46,.15)}
+.gossip-item-en{
+  font-family:'Cormorant Garamond',serif;font-size:16.5px;font-style:italic;
+  line-height:2.1;color:#0f0e1a;margin-bottom:12px;word-break:keep-all;font-weight:500;
+}
+.gossip-item-kr{
+  font-family:'Noto Serif KR',serif;font-size:14px;
+  line-height:2.05;color:rgba(15,14,26,.72);
+  border-top:1px solid rgba(26,24,48,.1);padding-top:10px;word-break:keep-all;
+}
+.gossip-modal-foot{
+  border-top:1px solid rgba(26,24,48,.1);padding:14px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;background:rgba(250,248,244,.8);
+}
+.gossip-modal-xoxo{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  color:var(--crim);letter-spacing:.1em;
+}
+.gossip-modal-gg{
+  font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.34em;
+  color:var(--dim);text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+
+<!-- ════ INTRO ══════════════════════════════════ -->
+<div id="intro">
+  <div class="intro-veil" id="iv"></div>
+  <div class="intro-paper">
+    <div class="intro-paper-head">
+      <div class="intro-paper-name">The Westfield Gazette</div>
+      <div class="intro-paper-meta">Vol. 128 · Spotted Column</div>
+    </div>
+    <div class="intro-paper-body">
+      <div class="intro-text" id="itext"><span class="intro-cur" id="icur"></span></div>
+    </div>
+    <div class="intro-paper-foot">
+      <div class="intro-xoxo" id="ixoxo">XOXO 💋</div>
+      <div class="intro-gg" id="igg"></div>
+    </div>
+  </div>
+  <div class="intro-hint">— 클릭하여 입장 —</div>
+</div>
+
+<!-- ════ SITE ════════════════════════════════════ -->
+<div id="site">
+
+<!-- SCHOOL BANNER -->
+<header class="school-banner">
+  <div class="sb-left">
+    <div class="sb-shield">W</div>
+    <div class="sb-name">Westfield University</div>
+    <div class="sb-motto">Veritas per Fortitudinem</div>
+  </div>
+  <div class="sb-right">Character File · WU-STERLING-0001</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-accent"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div>
+        <div class="hero-label">Sterling Gate Penthouse · Class of '25</div>
+        <h1 class="hero-name">Dexter<br><span>Sterling</span></h1>
+        <p class="hero-sub">덱스터 스털링</p>
+        <div class="acad-badge">
+          <div><div class="acad-badge-dept">Department of Economics</div><div class="acad-badge-yr" style="margin-top:2px">경제학과 · 3학년 (Junior) · 부전공 심리학</div></div>
+        </div>
+        <div class="hero-pills">
+          <div class="pill"><div class="pill-k">나이</div><div class="pill-v">21세</div></div>
+          <div class="pill"><div class="pill-k">신장</div><div class="pill-v">187cm</div></div>
+          <div class="pill"><div class="pill-k">거주지</div><div class="pill-v">Sterling Gate PH</div></div>
+          <div class="pill hot"><div class="pill-k">현재 상태</div><div class="pill-v">진심이 되는 중</div></div>
+        </div>
+      </div>
+      <a href="#" class="hero-play">
+        플레이하기
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo"><img src="https://i.postimg.cc/0y9368rh/덱스터_메인.png" alt="Dexter Sterling"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB NAV -->
+<div class="tabnav-wrap">
+  <nav class="tabnav">
+    <button class="tbtn active" data-t="world">세계관</button>
+    <button class="tbtn" data-t="character">캐릭터</button>
+    <button class="tbtn" data-t="etc">기타</button>
+  </nav>
+</div>
+
+<!-- ════ WORLD ════════════════════════════════════ -->
+<div id="tab-world" class="panel active">
+  <div class="world-body">
+
+    <!-- Drop-cap narrative -->
+    <div style="margin-bottom:60px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;border-bottom:1px solid var(--crim-l);padding-bottom:14px">
+        <p style="font-family:'Playfair Display',serif;font-size:9px;font-weight:700;letter-spacing:.6em;color:var(--crim);text-transform:uppercase">SPOTTED · WESTFIELD, CT</p>
+        <div style="display:flex;flex-direction:column;align-items:flex-end">
+          <button class="gossip-btn" id="gossipOpenBtn">Westfield Gossip</button>
+          <span class="gossip-hint">▲ tap to read</span>
+        </div>
+      </div>
+      <div style="max-width:820px;">
+        <p style="font-family:'Noto Serif KR',serif;font-size:15.5px;line-height:2.65;color:var(--ink2);margin-bottom:20px;word-break:keep-all;text-align:justify">
+          웨스트필드 대학교. 코네티컷 주 깊숙한 곳, 단풍나무와 석조 건물이 어우러진 이 사립 명문대는 겉으로 아이비리그의 품격을 두르고, 안으로는 지폐 냄새가 벽돌 틈새마다 스며든 곳이었다. 1897년 개교 이래 이곳을 거쳐 간 졸업생들의 이름은 <strong style="color:var(--ink)">월스트리트와 워싱턴의 명함첩</strong>에 빼곡히 박혀 있었다.
+        </p>
+        <p style="font-family:'Noto Serif KR',serif;font-size:15.5px;line-height:2.65;color:var(--ink2);margin-bottom:20px;word-break:keep-all;text-align:justify">
+          하지만 이 캠퍼스의 진짜 통화는 달러가 아니라 <em style="font-style:normal;color:var(--crim);font-weight:600">'이름'</em>이었다. 파티 초대장은 신분증이었고, 가십은 와이파이보다 빠르게 캠퍼스를 관통했다. 금요일 밤 누가 누구의 침대에서 나왔는지, 월요일 아침 첫 수업 전에 이미 해부가 끝나 있었다.
+        </p>
+        <p style="font-family:'Noto Serif KR',serif;font-size:15.5px;line-height:2.65;color:var(--ink2);word-break:keep-all;text-align:justify">
+          그리고 2주 전, 금요일 밤. 캠퍼스 서쪽 끝 바, <em style="font-style:normal;color:var(--crim);font-weight:600">'더 벨벳'</em>의 구석 부스에서 모든 것이 시작되었다. 그것이 자신의 목을 천천히 조여올 올가미의 첫 매듭이 될 거라고는, 꿈에도 몰랐다.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bet block -->
+    <div class="bet-pull">
+      <div class="bet-who">Jack Morgan — The Velvet, Friday Night</div>
+      <div class="bet-line"><strong>"Bet you can't bag her. A thousand bucks says you crash and burn."</strong><br><span style="font-size:13px;color:rgba(250,248,244,.42)">(못 꼬실 걸. 천 달러 걸지.)</span></div>
+      <div class="bet-who" style="margin-top:20px">Dexter Sterling</div>
+      <div class="bet-line"><strong>"Deal. Give me two weeks."</strong><br><span style="font-size:13px;color:rgba(250,248,244,.42)">(좋아. 2주만 줘.)</span></div>
+    </div>
+
+    <!-- World cards -->
+    <div class="sec-rule" style="margin-top:60px"><div class="sec-rule-line"></div><div class="sec-rule-label">세계관 설정</div><div class="sec-rule-line2"></div></div>
+    <div class="world-cards">
+      <div class="wcard full"><div class="wcard-tag">배경</div><div class="wcard-title">Westfield University · Connecticut, 1897</div><div class="wcard-text">아이비리그에 준하는 명성과 학비. 재학생 약 6,000명. 학내 계급은 성적이 아닌 <strong>가문과 자산</strong>으로 결정되며, 캠퍼스 북쪽 스털링 게이트는 울타리 하나로 일반 기숙사와 격리된다. 학교 모토 Veritas per Fortitudinem — 이 캠퍼스에서 진실은 가장 비싼 대가를 치른다.</div></div>
+      <div class="wcard"><div class="wcard-tag">The Velvet</div><div class="wcard-title">캠퍼스 서쪽 끝 · Bar</div><div class="wcard-text">매주 금요일 밤 학생들이 몰리는 바. 이곳의 부스에서 오간 대화는 월요일 아침까지 캠퍼스 전체에 퍼진다. <strong>내기가 시작된 장소.</strong></div></div>
+      <div class="wcard"><div class="wcard-tag">계급 구조</div><div class="wcard-title">가문과 자산</div><div class="wcard-text">장학생과 기부 입학생 사이의 보이지 않는 경계선. "기부금 경쟁률이 입학 경쟁률보다 치열하다."</div></div>
+    </div>
+
+    <!-- Campus Map -->
+    <div class="sec-rule"><div class="sec-rule-line"></div><div class="sec-rule-label">캠퍼스 맵</div><div class="sec-rule-line2"></div></div>
+    <div class="map-wrap">
+      <div class="map-head"><div class="map-head-title">Westfield University Campus</div><div class="map-head-sub">건물 클릭 시 상세 정보</div></div>
+      <div class="map-body" id="campusMap">
+        <div class="map-paths"><svg viewBox="0 0 1000 625" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 180,312 L 820,312" stroke="#c8bfb0" stroke-width="5" fill="none" opacity=".7"/>
+          <path d="M 500,100 L 500,560" stroke="#c8bfb0" stroke-width="5" fill="none" opacity=".7"/>
+          <path d="M 280,190 L 500,312 L 720,190" stroke="#c8bfb0" stroke-width="3" fill="none" opacity=".4"/>
+          <path d="M 280,440 L 500,312 L 720,440" stroke="#c8bfb0" stroke-width="3" fill="none" opacity=".4"/>
+          <path d="M 500,100 L 500,42" stroke="#c8bfb0" stroke-width="3" fill="none" opacity=".45"/>
+          <path d="M 180,312 L 60,380" stroke="#c8bfb0" stroke-width="3" fill="none" opacity=".45"/>
+          <path d="M 500,560 L 500,590" stroke="#c8bfb0" stroke-width="4" fill="none" opacity=".55"/>
+          <path d="M 80,80 Q 500,35 920,80 Q 960,312 920,545 Q 500,595 80,545 Q 40,312 80,80 Z" stroke="#c8bfb0" stroke-width="1.5" fill="none" opacity=".22"/>
+        </svg></div>
+        <div class="gs gs-quad"></div><div class="gs gs-south"></div><div class="gs gs-north"></div>
+        <div class="sterling-zone"><div class="sterling-zone-lbl">STERLING GATE</div></div>
+        <div class="map-pond"><div class="map-pond-lbl">Pond</div></div>
+        <div class="tree" style="left:26%;top:36%"></div><div class="tree lg" style="left:28%;top:38%"></div>
+        <div class="tree sm" style="left:24%;top:40%"></div><div class="tree" style="left:66%;top:31%"></div>
+        <div class="tree lg" style="left:16%;top:54%"></div><div class="tree" style="left:18%;top:57%"></div>
+        <div class="tree" style="left:79%;top:44%"></div><div class="tree sm" style="left:81%;top:46%"></div>
+        <div class="tree lg" style="left:42%;top:19%"></div><div class="tree" style="left:86%;top:22%"></div>
+        <div class="tree" style="left:12%;top:25%"></div><div class="tree" style="left:32%;top:72%"></div>
+        <div class="tree lg" style="left:75%;top:64%"></div>
+        <div class="bld lux" data-id="p" style="left:43%;top:6%"><div class="bld-tip">Sterling Gate Penthouse ★</div><div class="bld-body t-lx" style="width:68px;height:32px"><span class="bld-lbl">PENTHOUSE</span></div></div>
+        <div class="bld lux" data-id="se" style="left:63%;top:8%"><div class="bld-tip">Sterling Gate East</div><div class="bld-body t-lx" style="width:46px;height:26px"><span class="bld-lbl">S · E</span></div></div>
+        <div class="bld lux" data-id="sw" style="left:27%;top:8%"><div class="bld-tip">Sterling Gate West</div><div class="bld-body t-lx" style="width:46px;height:26px"><span class="bld-lbl">S · W</span></div></div>
+        <div class="bld" data-id="fh" style="left:42%;top:30%"><div class="bld-tip">Founders Hall</div><div class="bld-body t-ac" style="width:76px;height:42px"><span class="bld-lbl">FOUNDERS</span></div></div>
+        <div class="bld" data-id="lib" style="left:63%;top:28%"><div class="bld-tip">Whitmore Library</div><div class="bld-body t-ac" style="width:60px;height:38px"><span class="bld-lbl">LIBRARY</span></div></div>
+        <div class="bld" data-id="sci" style="left:73%;top:39%"><div class="bld-tip">Harrington Science</div><div class="bld-body t-ac" style="width:52px;height:46px"><span class="bld-lbl">SCI</span></div></div>
+        <div class="bld" data-id="hum" style="left:21%;top:32%"><div class="bld-tip">Morrison Hall (인문관)</div><div class="bld-body t-ac" style="width:52px;height:36px"><span class="bld-lbl">HUM</span></div></div>
+        <div class="bld" data-id="ch" style="left:49%;top:48%"><div class="bld-tip">University Chapel</div><div class="bld-body t-sp" style="width:32px;height:44px;border-radius:3px 3px 1px 1px"><span class="bld-lbl">✦</span></div></div>
+        <div class="bld" data-id="da" style="left:63%;top:60%"><div class="bld-tip">Eastwick Dormitory</div><div class="bld-body t-do" style="width:48px;height:28px"><span class="bld-lbl">DORM A</span></div></div>
+        <div class="bld" data-id="db" style="left:42%;top:66%"><div class="bld-tip">Caldwell Dormitory</div><div class="bld-body t-do" style="width:48px;height:28px"><span class="bld-lbl">DORM B</span></div></div>
+        <div class="bld" data-id="dc" style="left:24%;top:60%"><div class="bld-tip">Mayfield Dormitory</div><div class="bld-body t-do" style="width:48px;height:28px"><span class="bld-lbl">DORM C</span></div></div>
+        <div class="bld" data-id="su" style="left:35%;top:50%"><div class="bld-tip">Student Union</div><div class="bld-body t-sp" style="width:50px;height:28px"><span class="bld-lbl">UNION</span></div></div>
+        <div class="bld" data-id="tv" style="left:3%;top:54%"><div class="bld-tip">The Velvet ★</div><div class="bld-body t-so" style="width:52px;height:26px"><span class="bld-lbl">VELVET</span></div></div>
+        <div class="bld" data-id="ath" style="left:81%;top:58%"><div class="bld-tip">Athletics Center</div><div class="bld-body t-sp" style="width:56px;height:32px"><span class="bld-lbl">ATHL</span></div></div>
+        <div class="bld" data-id="adm" style="left:16%;top:43%"><div class="bld-tip">Prescott Admin</div><div class="bld-body t-ac" style="width:42px;height:28px"><span class="bld-lbl">ADM</span></div></div>
+        <div class="bld" data-id="law" style="left:82%;top:24%"><div class="bld-tip">Aldridge Law</div><div class="bld-body t-ac" style="width:48px;height:32px"><span class="bld-lbl">LAW</span></div></div>
+        <div class="bld" data-id="mg" style="left:46%;top:88%"><div class="bld-tip">Westfield Main Gate</div><div class="bld-body t-gt" style="width:40px;height:14px"><span class="bld-lbl">GATE</span></div></div>
+        <svg class="map-compass" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="16" fill="none" stroke="#1a1830" stroke-width="0.5" opacity="0.3"/>
+          <polygon points="18,3 19.5,15 18,13.5 16.5,15" fill="#9b1a2e" opacity="0.7"/>
+          <polygon points="18,33 19.5,21 18,22.5 16.5,21" fill="#1a1830" opacity="0.2"/>
+          <text x="18" y="2.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="4" font-weight="600" fill="#9b1a2e" opacity="0.8">N</text>
+          <circle cx="18" cy="18" r="1.2" fill="#1a1830" opacity="0.25"/>
+        </svg>
+        <div class="map-info" id="mapInfo">
+          <button class="map-info-close" id="mapClose">✕</button>
+          <div class="map-info-name" id="mn"></div>
+          <div class="map-info-type" id="mt"></div>
+          <div class="map-info-desc" id="md"></div>
+        </div>
+      </div>
+      <div class="map-foot">
+        <div class="lgd"><div class="lgd-dot" style="background:#c8bfb0"></div>학술</div>
+        <div class="lgd"><div class="lgd-dot" style="background:#bfa898"></div>기숙사</div>
+        <div class="lgd"><div class="lgd-dot" style="background:#c5b99a;border:1px solid rgba(154,123,79,.4)"></div>Sterling Gate</div>
+        <div class="lgd"><div class="lgd-dot" style="background:#a8978a"></div>사교</div>
+        <div class="lgd"><div class="lgd-dot" style="background:#b8b0a2"></div>기타</div>
+      </div>
+    </div>
+
+    <!-- Jack NPC -->
+    <div class="sec-rule" style="margin-top:60px"><div class="sec-rule-line"></div><div class="sec-rule-label">NPC · 잭 모건</div><div class="sec-rule-line2"></div></div>
+    <div class="npc-row">
+      <div class="npc-img"><img src="https://i.postimg.cc/T1mSb1V5/잭모건_증명사진.png" alt="Jack Morgan" style="width:100%;height:100%;object-fit:cover;object-position:top center"></div>
+      <div>
+        <div class="npc-role">내기 제안자 · 오랜 친구</div>
+        <div class="npc-name">잭 모건</div>
+        <div class="npc-en">Jack Morgan · 21세</div>
+        <div class="npc-acad">
+          <span>경영학과 (Business Admin)</span>
+          <div style="width:1px;height:14px;background:rgba(155,26,46,.2)"></div>
+          <small>3학년 Junior</small>
+        </div>
+        <div class="npc-desc">덱스터와 같은 보딩스쿨 출신, 같은 해 웨스트필드 입학. 키 182cm. 입이 세 배 크고, 눈치가 비정상적으로 빠르다. 천 달러를 걸고 2주 기한을 붙인 내기를 제안한 장본인. 더 벨벳의 단골. 교수들 사이에서 '스털링의 그림자'라 불리기도 하며, 잭 본인은 그 별명을 알고 있고, 알면서도 웃어넘긴다. 덱스터가 유저에게 평소와 다르게 행동하고 있음을 이미 감지 — 아직은 떠보는 단계.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ CHARACTER ════════════════════════════════ -->
+<div id="tab-character" class="panel">
+  <div class="char-body">
+    <div class="yb-card">
+      <!-- Photo col -->
+      <div class="yb-photo-col">
+        <div class="yb-photo"><img src="https://i.postimg.cc/KcgCwqdw/덱스터_증명사진.png" alt="Dexter Sterling" style="width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .7s"></div>
+        <div class="yb-cap">Dexter Sterling · WU '25</div>
+      </div>
+      <!-- Info col -->
+      <div class="yb-info">
+        <div class="yb-id-strip">
+          <span class="yb-id-strip-l">Westfield University · Character File</span>
+          <span class="yb-id-strip-r">WU-STERLING-0001</span>
+        </div>
+        <div class="yb-name">Dexter Sterling</div>
+        <div class="yb-name-sub">덱스터 스털링</div>
+        <!-- Academic band -->
+        <div class="yb-acad">
+          <div class="yb-acad-cell"><div class="yb-acad-k">학부</div><div class="yb-acad-v">경제학과</div></div>
+          <div class="yb-acad-cell"><div class="yb-acad-k">학년</div><div class="yb-acad-v">3학년 Junior</div></div>
+          <div class="yb-acad-cell"><div class="yb-acad-k">부전공</div><div class="yb-acad-v">심리학</div></div>
+          <div class="yb-acad-cell"><div class="yb-acad-k">성적</div><div class="yb-acad-v">중상위권</div></div>
+        </div>
+        <!-- Stats -->
+        <div class="stat-grid">
+          <div class="sc"><div class="sk">나이 · 신장</div><div class="sv"><strong>21세</strong> · 187cm · 미국</div></div>
+          <div class="sc"><div class="sk">거주지</div><div class="sv"><strong>Sterling Gate Penthouse</strong></div></div>
+          <div class="sc"><div class="sk">말투</div><div class="sv">빈정거리듯 나른하고 여유로운 어조<br>비속어 혼용. 천박해 보이지 않음</div></div>
+          <div class="sc"><div class="sk">목소리</div><div class="sv">낮고 부드러운 중저음<br>귓가에서 특히 매력적</div></div>
+          <div class="sc full"><div class="sk">외형</div><div class="sv">
+            약간 길고 헝클어진 <strong>블론드 헤어</strong> · <strong>짙은 푸른색 눈</strong> · 날렵한 턱선<br>
+            운동으로 다져진 탄탄한 체형 · <strong>귀에 작은 은색 피어싱</strong><br>
+            항상 풀어진 셔츠 윗단추, 비싼 브랜드의 가죽 자켓이나 스웨터
+          </div></div>
+          <div class="sc"><div class="sk">좋아하는 것</div><div class="sv">비싼 술 · 스포츠카<br>이기는 것 · 사람들의 시선</div></div>
+          <div class="sc"><div class="sk">싫어하는 것</div><div class="sv">지루함 · 구속<br>통제 불가능한 상황<br><span style="font-size:11.5px;color:var(--crim)">(현재: 자신의 감정)</span></div></div>
+          <div class="sc"><div class="sk">습관</div><div class="sv"><strong>아랫입술을 살짝 깨무는 버릇</strong><br>상대 눈을 빤히 쳐다보며 웃음<br>무시할 때 턱을 살짝 치켜듦</div></div>
+          <div class="sc"><div class="sk">학업 메모</div><div class="sv">머리는 있으나 전력투구형 아님.<br>시험 기간에도 펜트하우스 파티 — 낙제 근처엔 얼씬 안 함.<br>심리학 부전공 이유: <em style="font-style:italic;color:var(--dim)">"사람 읽는 데 도움이 되니까."</em></div></div>
+          <div class="sc full"><div class="sk">성격</div><div class="sv">겉으로는 한없이 여유롭고 능글맞지만, 깊은 내면에는 누군가와 진정한 관계를 맺는 방법에 대한 무지가 자리 잡고 있다.</div>
+            <div class="chips"><span class="chip">블론드 블루아이</span><span class="chip">천하태평</span><span class="chip">내기 중</span><span class="chip">스털링家</span><span class="chip">Economics Junior</span><span class="chip">통제불능 감정</span></div>
+          </div>
+        </div>
+        <div class="alert red"><div class="alert-k">두려움</div><p>진심이 되어 상처받는 것. <strong>자신의 얕은 바닥을 들키는 것.</strong></p></div>
+        <div class="alert"><div class="alert-k">비고</div><p>요즘 들어 친구들의 연락을 의도적으로 피하고 있다. 펜트하우스 파티는 최근 뜸해졌다. <strong>서랍 속 천 달러 지폐 뭉치는 아직 그대로다.</strong></p></div>
+        <a href="https://rofan.ai/character/aca33367-e300-44f6-8980-4e1fdf2f7f35" target="_blank" class="play-btn">플레이하기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ETC ══════════════════════════════════════ -->
+<div id="tab-etc" class="panel">
+  <div class="etc-body">
+    <div class="etc-hd"><div class="etc-title">공통 유저 인풋</div><div class="etc-sub">Common User Input</div></div>
+    <button class="tog-btn" id="ib"><span class="tog-label">▸ 펼치기</span><span class="tog-caret">▾</span></button>
+    <div class="tog-body" id="ic">
+      <div class="ui-text">
+        <span class="sms">[덱스터. 나 지금 가는 중이야!]</span><br>
+        <em>유저로부터 문자가 도착했다.</em>
+      </div>
+    </div>
+
+    <div class="etc-hd" style="margin-top:52px"><div class="etc-title">모델별 아웃풋</div><div class="etc-sub">Model Output Comparison</div></div>
+    <div class="model-list">
+
+      <!-- Gemini 2.5 Pro -->
+      <div class="mi"><button class="mi-btn" data-o="g25"><div class="mi-meta"><span class="mi-badge">Google</span><span class="mi-name">Gemini 2.5 Pro</span></div><span class="mi-caret">▾</span></button>
+      <div class="mi-body" id="out-g25"><div class="out">
+        <p><em>엘리베이터의 매끄러운 상승이 멈추고, 덱스터의 펜트하우스 현관문이 눈앞에 나타났다. 카드키를 태그하는 손길은 기계적이었다. 묵직한 문이 소리 없이 열리고, 안으로 들어서는 그의 등 뒤로 무심하게 닫혔다. 거실은 온통 회색빛이었다. 통유리창 너머로 해가 저물기 시작한 캠퍼스의 전경이 그림처럼 펼쳐져 있었지만, 그 풍경조차 어딘가 색이 바랜 듯 느껴졌다. 평소라면 친구들이 점령했을 소파는 텅 비어 있었고, 여기저기 굴러다녀야 할 술병 대신 가지런히 정돈된 쿠션만이 자리를 지키고 있었다. 고요함이 먼지처럼 공간을 채우고 있었다.</em></p>
+        <p><em>그가 가죽 재킷을 벗어 소파에 아무렇게나 던지려는 순간, 주머니 속 핸드폰이 짧게 진동했다. 화면에 떠오른 이름. 유저. 그리고 뒤이어 나타난 메시지.</em></p>
+        <div class="sms"><span class="sms-icon">💬</span><div class="sms-bubble">[덱스터. 나 지금 가는 중이야!]</div></div>
+        <p><em>덱스터의 손가락이 멈칫했다. 그는 잠시 화면을 내려다보다가, 짧게 숨을 내쉬며 핸드폰을 거실 테이블 위로 던지듯 내려놓았다. 액정이 바닥을 향하며 빛이 사라졌다. 곧 그녀가 온다. 평소라면 능숙하게 맞이할 준비를 했을 테지만, 오늘은 달랐다. 잭의 목소리가 귓가에 이명처럼 맴돌았다.</em></p>
+        <p><em>'진짜 빠진 거야?'</em></p>
+        <p><span class="dlg">"Shit.<br>(젠장.)"</span></p>
+        <p><em>나지막한 욕설이 입술 사이로 흘러나왔다. 그는 마른세수를 한번 하더니 부엌으로 향했다. 냉장고를 열자 서늘한 공기와 함께 가지런히 채워진 맥주병들이 보였다. 그중 하나를 꺼내 뚜껑을 따고, 차가운 병을 입술에 가져다 댔다. 탄산이 목구멍을 톡 쏘며 넘어갔지만, 머릿속의 복잡함은 가시질 않았다. 창가로 걸어간 그는 병을 든 채 밖을 내다보았다. 저 아래, 개미처럼 작아 보이는 학생들이 삼삼오오 짝을 지어 기숙사로 향하고 있었다. 저들 중 하나가, 이제 곧 이 엘리베이터를 타고 올라올 것이다. 자신이 세운 계획과 통제 아래 있어야 할, 그러나 어느새 그 궤도를 벗어나 버린 여자.</em></p>
+        <p><em>그는 자신이 왜 이렇게 짜증이 나는지 정확히 알 수 없었다. 내기에 이겼고, 돈도 받았고, 여전히 캠퍼스에서 그의 평판은 굳건했다. 모든 것이 그의 손안에 있었다. 하지만 유저의 얼굴을 떠올릴 때마다, 심장 어딘가가 불편하게 저려왔다. 그건 계획에 없던 감각이었다. 통제 불가능한 변수. 덱스터 스털링의 사전에 존재해서는 안 되는 단어였다.</em></p>
+        <p><em>얼마나 지났을까. 현관 도어록이 해제되는 경쾌한 소리가 적막을 깼다. 삑, 삑, 삑, 삑. 익숙한 비밀번호, 그리고 문이 열리는 소리. 그는 창밖에서 시선을 떼지 않은 채, 맥주병을 쥔 손에 힘을 주었다. 등 뒤에서 들려오는 발소리가 점점 가까워졌다. 그녀의 향기가, 그의 고요한 성역을 부드럽게 침범해 들어오고 있었다.</em></p>
+      </div></div></div>
+
+      <!-- Gemini 3.1 Pro -->
+      <div class="mi"><button class="mi-btn" data-o="g31"><div class="mi-meta"><span class="mi-badge">Google</span><span class="mi-name">Gemini 3.1 Pro</span></div><span class="mi-caret">▾</span></button>
+      <div class="mi-body" id="out-g31"><div class="out">
+        <p><em>엘리베이터 문이 부드러운 기계음과 함께 열렸다. 스털링 게이트 최상층, 펜트하우스의 넓은 거실은 숨이 막힐 정도로 고요했다. 통유리창 너머로 쏟아지는 오후의 햇살이 차가운 대리석 바닥 위로 길게 그림자를 드리웠다. 덱스터는 가죽 자켓을 벗어 소파 위로 아무렇게나 던져버리고는, 습관처럼 바 카운터로 걸어갔다.</em></p>
+        <p><em>크리스탈 글라스를 꺼내려던 찰나, 주머니 속에서 짧은 진동이 울렸다.</em></p>
+        <div class="sms"><span class="sms-icon">💬</span><div class="sms-bubble">[덱스터. 나 지금 가는 중이야!]</div></div>
+        <p><em>화면 위로 떠오른 유저의 이름. 그리고 그 뒤에 붙은 느낌표 하나. 평소 같았다면 가볍게 비웃으며 화면을 껐을 텐데, 지금은 그 느낌표 하나가 묘하게 신경을 긁었다. 활기차고, 아무런 의심도 없는 저 활자. 잭의 비아냥거림이 귓가에 다시 맴돌았다.</em></p>
+        <p><em>'설마 진짜 빠진 거야?'</em></p>
+        <p><em>덱스터는 아랫입술을 짓이기듯 깨물었다. 화면을 노려보는 짙은 푸른색 눈동자에는 명백한 짜증이 서려 있었다. 자신을 향한 짜증이었다. 고작 여자애 하나다. 언제든 원할 때 시작하고, 지루해지면 끝내버리는 수많은 유희 중 하나일 뿐이었다. 그런데 왜 지금, 이 넓고 텅 빈 공간에서 그녀가 오기만을 기다리는 사람처럼 굴고 있는 건지 스스로도 이해할 수 없었다.</em></p>
+        <p><em>탁.</em></p>
+        <p><em>그는 핸드폰을 대리석 카운터 위에 신경질적으로 내려놓았다. 글라스를 꺼내는 대신, 양손으로 카운터 가장자리를 짚고 고개를 숙였다. 풀어헤친 셔츠 깃 사이로 더운 숨이 새어 나갔다. 2주. 잭과 약속했던 기한은 이미 한참 전에 지났다. 내기에서 이겼다는 걸 증명하려면 진작에 유저를 차버렸어야 했다. 하지만 그는 그러지 않았다. 아니, 그러지 못했다.</em></p>
+        <p><em>유저가 자신을 바라볼 때의 그 눈빛. 맹목적이고, 티 없이 맑은 그 시선이 닿을 때면, 뱃속 어딘가가 뻐근해지는 기분이었다. 처음 겪어보는 불쾌하고도 낯선 감각. 통제할 수 없는 무언가가 자신의 영역 안으로 침범하고 있다는 경고등이 미친 듯이 깜빡이고 있었지만, 덱스터는 그 경고를 애써 무시하고 있었다.</em></p>
+        <p><em>다시 한번 화면이 밝아지며 웅웅거렸다. 덱스터는 천천히 고개를 들어 핸드폰을 집어 들었다. 답장을 쓰기 위해 키패드 위로 엄지손가락을 올렸지만, 한참 동안 아무것도 입력하지 못했다. 뭐라고 보내야 하지? 평소처럼 능글맞게? 아니면 무심하게?</em></p>
+        <p><em>머리를 쓸어올린 그가 짧은 한숨을 내쉬며 화면을 두드렸다.</em></p>
+        <div class="sms"><span class="sms-icon">📤</span><div class="sms-bubble sent">[Take your time. Door's unlocked.<br><span style="opacity:.6;font-size:12px">(천천히 와. 문 열려 있으니까.)</span>]</div></div>
+        <p><em>전송 버튼을 누른 덱스터는 거실 한가운데를 서성거리기 시작했다. 넓은 공간이 오늘따라 좁게 느껴졌다. 이내 현관문 쪽에서 희미한 발소리가 들려오자, 그는 우뚝 걸음을 멈췄다. 턱을 살짝 치켜들고, 평소의 오만하고 여유로운 미소를 입가에 덧그렸다. 아무 일도 없는 것처럼. 완벽하게 통제하고 있는 것처럼.</em></p>
+      </div></div></div>
+
+      <!-- Claude Opus 4.6 -->
+      <div class="mi"><button class="mi-btn" data-o="co"><div class="mi-meta"><span class="mi-badge">Anthropic</span><span class="mi-name">Claude Opus 4.6</span></div><span class="mi-caret">▾</span></button>
+      <div class="mi-body" id="out-co"><div class="out">
+        <p><em>핸드폰이 울렸다. 짧은 진동 한 번.</em></p>
+        <p><em>엘리베이터 안, 스테인리스 벽면에 기댄 채로 화면을 내려다보는 덱스터의 눈동자가 멈췄다. 느슨하게 풀려 있던 입매가, 본인도 의식하지 못한 사이 아주 미세하게 달라졌다. 웃음이라 부르기엔 너무 얕고, 무표정이라 부르기엔 너무 많은 것이 담긴 떨림.</em></p>
+        <p><em>엄지가 화면 위를 한 번 스치더니, 답장을 치지 않았다. 치지 않은 게 아니라 치지 못한 것이었다. [알았어]라는 세 글자가 뭔가 부족하고, [기다리고 있어]는 자기 입에서 나올 단어가 아니었으므로.</em></p>
+        <p><em>펜트하우스 문을 열자 창문 너머로 늦은 오후의 빛이 거실을 비스듬히 가르고 있었다. 먼지 입자들이 금빛 사선 안에서 부유했다. 평소라면 눈에 들어오지도 않았을 것들이 유독 선명했다. 덱스터는 가죽 재킷을 소파 등받이에 걸치다가, 다시 집어 들어 옷장 쪽으로 가져갔다. 그러다 멈추더니, 결국 다시 소파에 던져놓았다.</em></p>
+        <p><em>손이 서랍 쪽으로 갔다가 방향을 틀어 머리카락 사이를 훑었다. 서랍 속 지폐 뭉치의 존재가 피부 밑에서 가시처럼 욱신거렸다.</em></p>
+        <p><em>거울 앞에 섰다. 셔츠 윗단추가 풀려 있었고, 귀의 은색 피어싱이 창가 빛을 받아 한 점 반짝였다. 이 얼굴로 몇 명의 밤을 열었고, 몇 명의 아침을 닫았던가. 숫자조차 기억나지 않는 그 모든 장면들이 지금은 빛바랜 필름처럼 느껴졌다.</em></p>
+        <p><em>인터폰이 울렸다.</em></p>
+        <p><em>덱스터의 어깨가 아주 약간, 거의 감지할 수 없을 정도로 긴장했다. 그리고 그 긴장을 삼키듯 목을 한 번 꺾고는 느릿한 걸음으로 현관을 향했다. 문을 여는 손가락에 힘이 들어간 건, 열기 싫어서가 아니라 열고 싶어서였다. 그 구별을 자기 자신에게 설명할 언어를 이 남자는 아직 갖고 있지 않았다.</em></p>
+        <p><em>문이 열렸다. 복도의 형광등 아래 서 있는 유저의 얼굴이 보였다.</em></p>
+        <p><em>덱스터의 시선이 그 얼굴 위를 한 바퀴 돌았다. 눈, 코, 입술. 마치 확인이라도 하듯. 지난번 헤어진 뒤 며칠 만인데, 그 며칠이 턱없이 길었다는 사실이 뱃속 어딘가를 불편하게 건드렸다.</em></p>
+        <p><em>그는 문틀에 한쪽 어깨를 기대고 팔짱을 꼈다. 익숙한 자세, 익숙한 각도. 오만함이 가장 잘 어울리는 포즈.</em></p>
+        <p><span class="dlg">"Took you long enough. I was about to start charging rent for the wait.<br>(꽤 오래 걸렸네. 대기료 받을 뻔했어.)"</span></p>
+        <p><em>목소리는 나른했다. 늘 그렇듯이. 하지만 문을 열어주는 손이 평소보다 조금 더 넓게 공간을 만들었고, 유저가 안으로 들어서는 동안 그의 시선은 단 한 순간도 그녀에게서 떨어지지 않았다. 닫히는 문 너머로 복도의 빛이 사라졌다.</em></p>
+        <p><em>펜트하우스 안에는 두 사람의 그림자만 남았다.</em></p>
+      </div></div></div>
+
+      <!-- Claude Sonnet 4.5 -->
+      <div class="mi"><button class="mi-btn" data-o="cs"><div class="mi-meta"><span class="mi-badge">Anthropic</span><span class="mi-name">Claude Sonnet 4.5</span></div><span class="mi-caret">▾</span></button>
+      <div class="mi-body" id="out-cs"><div class="out">
+        <p><em>핸드폰 화면에 뜬 메시지를 내려다보던 덱스터의 눈썹이 살짝 일그러졌다. 가슴속 어딘가가 또 그 묘한 방식으로 조여들었다. 짜증이 올라오는 것 같으면서도 아니었다. 뭐라 이름 붙일 수 없는, 역겨울 정도로 낯선 감정.</em></p>
+        <p><em>손가락이 화면 위에서 맴돌았다. '그래, 기다릴게' 같은 답장을 보낼까 하다가, 차라리 아무 말도 하지 않는 게 나을 것 같아서 핸드폰을 소파 쿠션 위로 내팽개쳤다.</em></p>
+        <p><em>펜트하우스는 깨끗했다. 평소라면 술병이나 빈 피자 상자가 여기저기 널려 있었을 법한데, 언제부턴가 유저가 오기 전날이면 청소를 맡기고 있었다. 자신도 모르게. 자각하는 순간 씁쓸한 웃음이 났다.</em></p>
+        <p><span class="dlg">"Pathetic.<br>(한심하네.)"</span></p>
+        <p><em>혼잣말이 거실에 퍼졌다. 바닥에 앉아 소파에 등을 기대고, 고개를 뒤로 젖혔다. 천장의 조명이 눈부시게 박혀 있었다.</em></p>
+        <p><em>서랍 속 지폐 뭉치가 또 머릿속을 스쳤다. 천 달러. 내기. 2주. 이제 두 달이 훌쩍 지났는데도 그 돈은 여전히 거기 있었고, 잭은 매번 비아냥거렸고, 자신은 매번 대꾸조차 제대로 하지 못했다. 뭐라고 말해야 할지 몰라서.</em></p>
+        <p><em>초인종이 울릴 시간까지 이제 얼마 남지 않았다. 덱스터는 소파 쿠션 너머로 손을 뻗어 핸드폰을 다시 집어 들었다가, 이내 화면을 켜지 않고 옆구리에 끼워 넣었다. 눈을 감았다. 숨을 길게 내쉬었다.</em></p>
+        <p><em>유저의 얼굴이 떠올랐다. 웃을 때 살짝 처지는 눈꼬리. 자신을 올려다볼 때의, 그 묘하게 믿음 같은 게 어린 시선.</em></p>
+        <p><span class="dlg">"Shit.<br>(젠장.)"</span></p>
+        <p><em>아랫입술을 깨물었다.</em></p>
+      </div></div></div>
+
+      <!-- GPT-5.4 -->
+      <div class="mi"><button class="mi-btn" data-o="gpt"><div class="mi-meta"><span class="mi-badge">OpenAI</span><span class="mi-name">GPT-5.4</span></div><span class="mi-caret">▾</span></button>
+      <div class="mi-body" id="out-gpt"><div class="out">
+        <p><em>진동 한 번. 덱스터는 현관 쪽으로 향하던 걸음을 멈췄다. 손안의 핸드폰 화면이 짧게 밝아졌다가, 그의 눈동자에 푸른빛처럼 번졌다. 유저의 문자였다. 단정하지도, 계산적이지도 않은 짧은 한 줄. 그는 그 한 줄을 금방 읽고도 바로 답하지 못했다. 엄지손가락이 화면 위에서 맴돌았다. 입꼬리는 습관처럼 조금 올라갔지만, 그 웃음은 어딘가 늦었다. 마치 얼굴이 먼저 외운 표정을 이제야 따라 붙이는 것 같았다.</em></p>
+        <p><em>펜트하우스 안은 지나치게 정돈되어 있었다. 바 테이블 위에는 반쯤 비운 물잔 하나, 소파 팔걸이엔 아무렇게나 벗어둔 검은 가죽 재킷, 스피커에서는 아주 낮은 볼륨으로 재즈가 흘렀다. 트럼펫 소리가 유리창에 부딪혀 흐려졌고, 뉴헤이븐 초가을의 저녁 공기는 통유리 바깥에서 점점 푸른 기색을 짙게 하고 있었다. 멀리 캠퍼스 종탑이 여섯 시를 알리기 직전의 정적을 머금고 있었다. 아래 도로에는 학생들 몇이 어깨를 웅크린 채 지나가고, 스포츠카 한 대가 짧게 가속음을 남기며 꺾여 나갔다.</em></p>
+        <p><em>덱스터는 천천히 숨을 들이마셨다. 셔츠 소매를 팔꿈치 아래까지 걷어 올린 채, 주방 아일랜드 모서리에 기대 섰다. 손등 위로 푸른 핏줄이 도드라졌고, 손가락 끝이 조용히 대리석을 두드렸다. 한 번, 두 번. 참을성 없는 사람의 박자였다. 그는 결국 짧게 답장을 보냈다.</em></p>
+        <div class="sms"><span class="sms-icon">📤</span><div class="sms-bubble sent">[Come up when you get here.<br><span style="opacity:.6;font-size:12px">(도착하면 바로 올라와.)</span>]</div></div>
+        <p><em>보내기 버튼을 누르고 나서도 화면을 한참 내려다봤다. 그 짧은 문장에 괜히 날이 서 있는 것 같아 미간이 미세하게 좁혀졌다. 지우고 다시 보낼까 싶다가, 그는 낮게 혀를 찼다. 이미 늦었다는 듯 핸드폰을 뒤집어 바 테이블 위에 던져두고 냉장고를 열었다. 안쪽에서 차가운 공기와 함께 레몬 껍질, 탄산수, 남겨둔 타이 음식 냄새가 스쳤다. 그는 병을 꺼냈다가 다시 넣었다. 술은 아니었다. 오늘은 이상하게, 평소처럼 유리잔에 무언가를 따르는 동작조차 방패처럼 느껴졌다.</em></p>
+        <p><em>현관 거울 앞에 선 그는 잠깐 자기 모습을 훑었다. 헝클어진 금발 사이로 이마가 반쯤 드러나 있었고, 셔츠 윗단추 두 개는 풀려 있었다. 단정해 보이려는 생각은 들지 않았다. 다만 조금 전보다 덜 초조해 보이고 싶었다. 손으로 머리를 쓸어 넘기던 동작이 중간에 멈췄다. 턱선이 굳었고, 아랫입술이 이빨 사이에 잠깐 물렸다가 놓였다.</em></p>
+        <p><em>엘리베이터가 올라오는 소리가 복도 저편에서 희미하게 울렸다. 기계음은 두꺼운 카펫과 벽을 통과하며 무뎌졌지만, 그에게는 이상할 정도로 또렷했다. 그는 문에서 너무 가까운 자리도, 너무 멀리 떨어진 자리도 아닌 곳에 섰다. 소파 옆, 불빛과 그림자가 반씩 걸치는 지점. 팔짱을 끼려다 그만두고, 손을 주머니에 찔러 넣었다.</em></p>
+        <p><em>잠금장치 쪽의 미세한 전자음이 정적을 갈랐다. 덱스터의 시선이 곧게 들렸다. 눈빛은 늘 그렇듯 느긋한 척 부드러웠지만, 목 아래에서는 맥박이 셔츠깃 안쪽에서 빠르게 뛰고 있었다.</em></p>
+        <p><span class="dlg">"Hey.<br>(왔네.)"</span></p>
+      </div></div></div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ GOSSIP POPUP ════════════════════════════ -->
+<div class="gossip-overlay" id="gossipOverlay">
+  <div class="gossip-modal">
+    <div class="gossip-modal-head">
+      <div class="gossip-modal-name">The Westfield Gazette</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div class="gossip-modal-meta">Spotted Column · Confidential</div>
+        <button class="gossip-modal-close" id="gossipCloseBtn">✕</button>
+      </div>
+    </div>
+    <div class="gossip-modal-body">
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 001</div>
+        <div class="gossip-item-en">Spotted: Dexter Sterling arriving to Professor Caldwell's 9AM macroeconomics lecture for the very first time this semester — and only because a certain someone mentioned she'd be there. Dedication to academia? We think not.</div>
+        <div class="gossip-item-kr">덱스터 스털링, 이번 학기 처음으로 오전 9시 강의에 출석했다. 거시경제학에 갑자기 눈을 뜬 게 아니다 — 그 시간에 누군가가 강의실에 있다는 한 마디가 전부였다는 후문. 학문적 각성이라 부르기엔 너무 사랑스럽고, 순진하다고 하기엔 너무 계산적이다.</div>
+      </div>
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 002</div>
+        <div class="gossip-item-en">Rumor has it that the Whitmore Library's third-floor window seat — the one unofficially reserved for whoever arrives first — was quietly held for two hours by a certain blond Economics junior who claimed he was "just waiting for a friend." The library doesn't open until 9. He arrived at 8:40.</div>
+        <div class="gossip-item-kr">휘트모어 도서관 3층 창가 자리 — 먼저 오는 사람이 갖는다는 그 명당 — 이 금발 경제학과 남학생에게 2시간째 점령당했다. 본인 왈, "그냥 친구 기다리는 중." 도서관 개방은 9시. 그의 도착은 8시 40분. 20분 먼저 와서 기다린다는 게, 친구 맞나요? 우리가 판단은 안 하겠다. 단지 기록할 뿐.</div>
+      </div>
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 003</div>
+        <div class="gossip-item-en">Jack Morgan was seen frantically deleting something from his phone at The Velvet last Friday night, moments before Dexter Sterling walked through the door. The screenshot folder in question? We have sources. We always do.</div>
+        <div class="gossip-item-kr">지난 금요일 더 벨벳. 덱스터 스털링이 문을 열기 30초 전, 잭 모건이 핸드폰을 들고 뭔가를 정말이지 필사적으로 지우는 중이었다. 그 폴더에 뭐가 있는지, 우리는 이미 알고 있다. 잭도 안다. 우리가 안다는 것도 안다. 그래도 지웠다 — 증거 인멸이란 행위 자체가 이미 증거다.</div>
+      </div>
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 004</div>
+        <div class="gossip-item-en">Sources confirm that someone ordered flowers to be delivered to a Sterling Gate penthouse last Tuesday — paid in cash, no note, sender unknown. The florist near the south gate is suddenly very popular with the anonymous crowd. Curious.</div>
+        <div class="gossip-item-kr">지난 화요일 스털링 게이트 펜트하우스에 꽃이 배달됐다. 현금. 메모 없음. 이름 없음. 남문 꽃집은 익명 현금 손님이 늘었다며 요즘 장사가 잘 된다고. 그래서 묻고 싶다 — 메모도 없이, 이름도 없이, 그 꽃이 누구 마음을 두드리길 바랐던 걸까. 익명이란 게 그렇게 편하면 꽃은 왜 보내나.</div>
+      </div>
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 005</div>
+        <div class="gossip-item-en">Westfield's most exclusive Friday tradition — the Sterling Gate rooftop — has been suspiciously quiet for three weeks running. No guest list. No bass line bleeding through the walls. Insiders say the host has been "otherwise occupied." With what, exactly? Our sources are still investigating.</div>
+        <div class="gossip-item-kr">스털링 게이트 옥상 파티가 3주째 없다. 초대장도, 새벽 두 시 베이스도, 다음 날 아침 복도에 굴러다니는 빈 병도. 캠퍼스의 금요일이 이토록 조용했던 게 언제였는지 기억이 안 날 정도다. 소식통 왈, 호스트가 요즘 "정신이 팔렸다"고. 누구한테냐는 물어보지 않았다. 굳이.</div>
+      </div>
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 006</div>
+        <div class="gossip-item-en">The Velvet's bartender — the one who's seen everything in ten years behind that counter — was overheard saying that a thousand-dollar bill appeared in the tip jar sometime between last semester and this one. No signature. But the handwriting on the accompanying napkin? Educated. Expensive. And deeply conflicted.</div>
+        <div class="gossip-item-kr">더 벨벳 10년 경력 바텐더의 증언 — 팁 통에 천 달러짜리가 꽂혀 있었다고. 이름 없음. 메모 없음. 대신 같이 놓인 냅킨에 뭔가 쓰다가 지운 흔적. 필체는 아주 좋았다고 한다. 결국 버리고 간 냅킨 한 장에 이 남자가 하고 싶었던 말이 다 있었던 건 아닐까 — 쓰고, 지우고, 버리는 것도 어쩌면 고백의 한 방식이니까.</div>
+      </div>
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 007</div>
+        <div class="gossip-item-en">Westfield's anonymous campus forum, "WU Confessions," received a new submission this week: "I've been tutoring the same person for four months. They don't need tutoring. I think I don't need tutoring either. I think we both just needed an excuse." Submitted from a campus IP address. Second floor. Sterling Gate building.</div>
+        <div class="gossip-item-kr">"WU Confessions" 이번 주 익명 제보: "4개월째 과외를 하고 있다. 그 사람도 필요 없고 나도 필요 없다. 둘 다 명분이 필요했던 것 같다." 제출 IP는 캠퍼스 내부. 건물은 스털링 게이트. 층수는 2층. 우리는 뭔가 더 말하고 싶지만, IP 주소가 이미 다 말해줬다.</div>
+      </div>
+
+      <div class="gossip-item">
+        <div class="gossip-item-num">Spotted · No. 008</div>
+        <div class="gossip-item-en">Overheard in the Prescott Administration hallway: a financial aid officer whispering that the Sterling family's annual donation this year came with one unusual addendum — a request for the scholarship recipient roster. No reason given. But Dexter Sterling was seen leaving the same office twenty minutes later. Coincidence? At Westfield, coincidences are always someone's plan.</div>
+        <div class="gossip-item-kr">프레스콧 행정관 복도에서 새어 나온 한 마디: 올해 스털링 가문 기부금에 조건이 붙었다. 장학금 수혜자 명단 열람 요청. 이유는 미제. 20분 후 덱스터 스털링이 같은 사무실에서 나왔다. 이게 우연이냐고? 웨스트필드에서 우연은 교양 수업 첫 단원에나 나온다. 실생활에서 우연이란 건, 그냥 아직 들키지 않은 계획이다.</div>
+      </div>
+
+    </div>
+    <div class="gossip-modal-foot">
+      <div class="gossip-modal-xoxo">XOXO 💋</div>
+      <div class="gossip-modal-gg"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="fl">창작 목적 · Westfield University는 가상의 학교입니다</span>
+  <div class="fm"><div class="fd on"></div><div class="fd"></div><div class="fd on"></div></div>
+  <span class="fr">WU-STERLING-FILE · XOXO 💋</span>
+</footer>
+
+</div><!-- /#site -->
+
+<script>
+/* MAP DATA */
+const MD = {
+  p:{name:'Sterling Gate Penthouse ★',type:'스털링 게이트 펜트하우스 · Luxury',desc:'최상층 펜트하우스. 대리석 로비, 카드키 전용 엘리베이터. 월세가 연간 등록금을 가볍게 넘긴다. 덱스터 스털링의 거처.'},
+  se:{name:'Sterling Gate East',type:'스털링 게이트 동관 · Luxury',desc:'기부금 상위 가문의 자제들이 거주하는 고급 주거단지 일부.'},
+  sw:{name:'Sterling Gate West',type:'스털링 게이트 서관 · Luxury',desc:'건물 이름과 같은 성을 가진 가문과의 관계는 "우연"이라고들 한다. 이 캠퍼스에서 우연이란 돈이 꾸며낸 필연의 다른 얼굴.'},
+  fh:{name:'Founders Hall',type:'파운더스 홀 · 본관',desc:'1897년 개교 당시 첫 번째로 세워진 석조 건물. 학장실과 가장 인기 있는 강의실이 자리한다.'},
+  lib:{name:'Whitmore Library',type:'휘트모어 도서관',desc:'70만 권의 장서. 3층 창가 자리는 비공식 예약석 — 누가 어디 앉는지가 또 하나의 권력 지도.'},
+  sci:{name:'Harrington Science Center',type:'해링턴 과학관',desc:'해링턴 가문의 기부로 최신 연구 시설을 갖추고 있다.'},
+  hum:{name:'Morrison Hall',type:'모리슨 홀 · 인문관',desc:'단풍나무 가로수길에 면한 석조 외벽이 가을이면 붉게 물든다.'},
+  ch:{name:'University Chapel',type:'대학 예배당',desc:'캠퍼스 한가운데 고딕 양식의 예배당. 종탑의 종소리가 매 정각 울려 퍼진다.'},
+  da:{name:'Eastwick Dormitory',type:'이스트윅 기숙사 · General',desc:'스털링 게이트와는 울타리 하나로 구분된 다른 세계. 장학생들의 새벽 불빛이 여기서 켜진다.'},
+  db:{name:'Caldwell Dormitory',type:'콜드웰 기숙사 · General',desc:'복도 게시판에는 과외 구인 광고와 파티 초대장이 공존한다.'},
+  dc:{name:'Mayfield Dormitory',type:'메이필드 기숙사 · General',desc:'더 벨벳까지 도보 5분. 금요일 밤이면 가장 먼저 텅 비는 건물.'},
+  su:{name:'Student Union',type:'학생회관',desc:'1층 카페에서 가십이 와이파이보다 빠르게 퍼진다는 말은 대개 여기서 증명된다.'},
+  tv:{name:'The Velvet ★',type:'더 벨벳 · Bar',desc:'캠퍼스 서쪽 끝의 바. 매주 금요일 밤. 구석 부스에서 덱스터와 잭의 내기가 시작된 장소.'},
+  ath:{name:'Athletics Center',type:'체육관',desc:'실내 수영장, 웨이트룸, 실내 코트. 라크로스·조정 팀이 아이비리그와 정기전을 치른다.'},
+  adm:{name:'Prescott Administration',type:'프레스콧 행정관',desc:'"기부금 경쟁률이 입학 경쟁률보다 치열하다"는 농담의 진원지.'},
+  law:{name:'Aldridge School of Law',type:'올드리지 법학관',desc:'졸업생들의 이름이 워싱턴과 월스트리트의 명함첩에 빼곡히 박혀 있다.'},
+  mg:{name:'Westfield Main Gate',type:'정문',desc:'"Veritas per Fortitudinem" — 이 캠퍼스의 모토이자, 가장 큰 아이러니.'}
+};
+document.querySelectorAll('.bld').forEach(el=>{
+  el.addEventListener('click',e=>{
+    e.stopPropagation();
+    const d=MD[el.dataset.id]; if(!d)return;
+    document.getElementById('mn').textContent=d.name;
+    document.getElementById('mt').textContent=d.type;
+    document.getElementById('md').textContent=d.desc;
+    document.getElementById('mapInfo').classList.add('show');
+  });
+});
+document.getElementById('mapClose').addEventListener('click',()=>document.getElementById('mapInfo').classList.remove('show'));
+document.getElementById('campusMap').addEventListener('click',e=>{
+  if(!e.target.closest('.bld'))document.getElementById('mapInfo').classList.remove('show');
+});
+
+/* INTRO */
+const gossipEN = `Spotted: Westfield's most eligible bachelor, glued to his phone in the Sterling Gate elevator with that look — you know the one. Darlings, he cleaned his penthouse. Voluntarily. Before someone came over. Dexter Sterling is catching feelings, and he has absolutely no idea what to do about it. You heard it here first, and you'll pretend you didn't.`;
+const gossipKR = `여러분. 그가 청소를 했다. 펜트하우스를. 자발적으로. 스털링 게이트 엘리베이터 안에서 핸드폰 하나 붙잡고 세상이 무너진 표정으로 서 있는 남자 — 덱스터 스털링이다. 감정이 생겼다. 본인도 모른다. 이게 그냥 지나갈 일이 아니라는 건, 우리가 더 잘 안다. 먼저 알았다는 거, 그냥 넘어가지 않겠다.`;
+const textEl=document.getElementById('itext');
+const curEl=document.getElementById('icur');
+const xEl=document.getElementById('ixoxo');
+const gEl=document.getElementById('igg');
+const introEl=document.getElementById('intro');
+const veilEl=document.getElementById('iv');
+const siteEl=document.getElementById('site');
+let entered=false;
+
+function typeIt(){
+  // 영어/한국어 동시 출력을 위한 컨테이너
+  const wrap=document.createElement('div');
+  wrap.style.cssText='display:grid;grid-template-columns:1fr;gap:10px';
+  textEl.insertBefore(wrap,curEl);
+
+  const spanEN=document.createElement('span');
+  spanEN.style.cssText='display:block;line-height:2.0';
+  const spanKR=document.createElement('span');
+  spanKR.style.cssText='display:block;font-size:14px;color:rgba(15,14,26,.72);font-style:normal;line-height:1.95;border-top:1px solid rgba(26,24,48,.14);padding-top:10px;margin-top:4px;font-family:Noto Serif KR,serif';
+  wrap.appendChild(spanEN);
+  wrap.appendChild(spanKR);
+
+  let i=0,j=0,done=false;
+  const enLen=gossipEN.length, krLen=gossipKR.length;
+  // 두 텍스트가 동시에 끝나도록 누적 비율로 진행
+  const totalTicks=enLen; // EN 기준 총 틱 수
+  const iv=setInterval(()=>{
+    // EN: 매 틱 1글자
+    if(i<enLen) spanEN.textContent+=gossipEN[i++];
+    // KR: EN 진행률에 맞춰 몇 글자 써야 하는지 계산
+    const targetJ=Math.round((i/enLen)*krLen);
+    while(j<targetJ && j<krLen) spanKR.textContent+=gossipKR[j++];
+    if(i>=enLen && j>=krLen && !done){
+      done=true;clearInterval(iv);
+      setTimeout(()=>{curEl.style.display='none';xEl.classList.add('show');gEl.classList.add('show')},350);
+    }
+  },20);
+}
+window.addEventListener('load',()=>{setTimeout(typeIt,400);setTimeout(()=>enter(),14000)});
+function enter(){
+  if(entered)return;entered=true;
+  veilEl.classList.add('close');
+  setTimeout(()=>{introEl.classList.add('out');siteEl.classList.add('on')},750);
+}
+introEl.addEventListener('click',enter);
+
+/* TABS */
+document.querySelectorAll('.tbtn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tbtn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('tab-'+b.dataset.t).classList.add('active');
+  });
+});
+
+/* TOGGLE */
+const ib=document.getElementById('ib'),ic=document.getElementById('ic');
+ib.addEventListener('click',()=>{
+  const o=ic.classList.toggle('open');
+  ib.classList.toggle('open',o);
+  ib.querySelector('.tog-label').textContent=o?'▾ 접기':'▸ 펼치기';
+});
+
+/* ACCORDION */
+document.querySelectorAll('.mi-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const id=b.dataset.o,cnt=document.getElementById('out-'+id),open=b.classList.contains('open');
+    document.querySelectorAll('.mi-btn').forEach(x=>x.classList.remove('open'));
+    document.querySelectorAll('.mi-body').forEach(x=>x.classList.remove('open'));
+    if(!open){b.classList.add('open');cnt.classList.add('open')}
+  });
+});
+
+/* GOSSIP POPUP */
+const gossipOverlay = document.getElementById('gossipOverlay');
+document.getElementById('gossipOpenBtn').addEventListener('click', () => {
+  gossipOverlay.classList.add('open');
+});
+document.getElementById('gossipCloseBtn').addEventListener('click', () => {
+  gossipOverlay.classList.remove('open');
+});
+gossipOverlay.addEventListener('click', e => {
+  if(e.target === gossipOverlay) gossipOverlay.classList.remove('open');
+});
+</script>
+</body>
+</html>
