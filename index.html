@@ -257,7 +257,7 @@ img{display:block}a{text-decoration:none;color:inherit}
 }
 .tbtn{
   height:48px;padding:0 26px;
-  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.3em;
+  font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.22em;
   color:var(--dim);text-transform:uppercase;
   position:relative;transition:color .18s;border-bottom:3px solid transparent;
   margin-bottom:-2px;
@@ -689,6 +689,97 @@ footer{
   font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.34em;
   color:var(--dim);text-transform:uppercase;
 }
+
+/* ══ SUB TABS ══════════════════════════════════════ */
+.sub-nav{display:flex;border-bottom:1px solid var(--lne);margin-bottom:36px}
+.sub-btn{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.22em;
+  color:rgba(26,24,48,.38);text-transform:uppercase;
+  padding:12px 0;margin-right:32px;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  background:none;border-left:none;border-right:none;border-top:none;
+  cursor:pointer;transition:color .15s;
+}
+.sub-btn.active{color:var(--navy);border-bottom-color:var(--crim)}
+.sub-btn:hover{color:var(--ink2)}
+.sub-pnl{display:none}
+.sub-pnl.active{display:block}
+
+/* ══ SMS BUBBLE (문자 스타일) ═══════════════════════ */
+
+/* ══ ENV MODAL ══════════════════════════════════════ */
+.env-row-wrap{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.env-trigger{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(154,30,46,.07);border:1px solid rgba(154,30,46,.22);
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
+  color:var(--crim);text-transform:uppercase;padding:9px 20px;
+  cursor:pointer;transition:background .15s;white-space:nowrap;flex-shrink:0;
+}
+.env-trigger:hover{background:rgba(154,30,46,.14)}
+.env-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.68);
+  display:flex;align-items:flex-start;justify-content:center;
+  padding-top:80px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.env-overlay.open{opacity:1;pointer-events:auto}
+.env-modal{
+  background:var(--paper);border:1px solid var(--lne);
+  border-top:2px solid var(--crim);
+  width:min(520px,92vw);
+  box-shadow:0 16px 48px rgba(0,0,0,.35);
+}
+.env-modal-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 26px;border-bottom:1px solid var(--lne);
+}
+.env-modal-title{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.3em;
+  color:var(--crim);text-transform:uppercase;
+}
+.env-modal-close{background:none;border:none;cursor:pointer;font-size:14px;color:var(--dim);padding:4px 8px;transition:color .15s}
+.env-modal-close:hover{color:var(--navy)}
+.env-modal-body{padding:4px 0}
+.env-row{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:14px 26px;border-bottom:1px solid var(--lne)}
+.env-row:last-child{border-bottom:none}
+.env-k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--crim);text-transform:uppercase}
+.env-v{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink2)}
+.env-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;padding:2px 9px;border:1px solid var(--lne);color:var(--dim);margin-left:6px}
+
+/* ══ PLAY MODAL ══════════════════════════════════════ */
+.play-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(15,14,26,.78);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s;padding:20px;
+}
+.play-overlay.open{opacity:1;pointer-events:auto}
+.play-modal-box{
+  background:var(--paper);border:1px solid var(--lne);
+  border-top:2px solid var(--crim);
+  width:min(420px,95vw);
+  box-shadow:0 24px 64px rgba(0,0,0,.25);
+  transform:translateY(8px);transition:transform .25s;
+}
+.play-overlay.open .play-modal-box{transform:none}
+.play-modal-hd{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--lne)}
+.play-modal-ttl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.32em;color:var(--crim);text-transform:uppercase}
+.play-modal-x{background:none;border:none;cursor:pointer;font-size:14px;color:var(--dim);padding:4px 8px;transition:color .15s}
+.play-modal-x:hover{color:var(--navy)}
+.play-modal-body{padding:16px 24px 24px}
+.play-opt{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border:1px solid var(--lne);background:var(--paper2);
+  margin-bottom:8px;text-decoration:none;transition:background .15s,border-color .2s;
+}
+.play-opt:last-child{margin-bottom:0}
+.play-opt:hover{background:var(--paper);border-color:var(--crim)}
+.po-name{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--navy)}
+.po-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--dim);margin-top:2px}
+.po-arr{font-size:12px;color:var(--crim);opacity:.7}
+
 </style>
 </head>
 <body>
@@ -744,7 +835,7 @@ footer{
           <div class="pill hot"><div class="pill-k">현재 상태</div><div class="pill-v">진심이 되는 중</div></div>
         </div>
       </div>
-      <a href="https://rofan.ai/character/1c3e4f79-aa8f-4aa1-a29d-6449554cc47b" target="_blank" class="hero-play">
+      <button class="hero-play" id="playTrigger2" type="button">
         플레이하기
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -936,7 +1027,7 @@ footer{
         </div>
         <div class="alert red"><div class="alert-k">두려움</div><p>진심이 되어 상처받는 것. <strong>자신의 얕은 바닥을 들키는 것.</strong></p></div>
         <div class="alert"><div class="alert-k">비고</div><p>요즘 들어 친구들의 연락을 의도적으로 피하고 있다. 펜트하우스 파티는 최근 뜸해졌다. <strong>서랍 속 천 달러 지폐 뭉치는 아직 그대로다.</strong></p></div>
-        <a href="https://rofan.ai/character/1c3e4f79-aa8f-4aa1-a29d-6449554cc47b" target="_blank" class="play-btn">플레이하기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <button class="play-btn" id="playTrigger" type="button">플레이하기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
     </div>
   </div>
@@ -945,17 +1036,24 @@ footer{
 <!-- ════ ETC ══════════════════════════════════════ -->
 <div id="tab-etc" class="panel">
   <div class="etc-body">
-    <div class="etc-hd"><div class="etc-title">공통 유저 인풋</div><div class="etc-sub">Common User Input</div></div>
-    <button class="tog-btn" id="ib"><span class="tog-label">▸ 펼치기</span><span class="tog-caret">▾</span></button>
-    <div class="tog-body" id="ic">
-      <div class="ui-text">
-        <span class="sms">[덱스터. 나 지금 가는 중이야!]</span><br>
-        <em>유저로부터 문자가 도착했다.</em>
-      </div>
-    </div>
 
-    <div class="etc-hd" style="margin-top:52px"><div class="etc-title">모델별 아웃풋</div><div class="etc-sub">Model Output Comparison</div></div>
-    <div class="model-list">
+    <nav class="sub-nav">
+      <button class="sub-btn active" data-s="rofan">로판AI</button>
+      <button class="sub-btn" data-s="caveduck">케이브덕</button>
+    </nav>
+
+    <!-- ── 로판AI ── -->
+    <div id="sub-rofan" class="sub-pnl active">
+      <div class="etc-hd"><div class="etc-title">공통 유저 인풋</div><div class="etc-sub">Common User Input</div></div>
+      <button class="tog-btn" id="ib"><span class="tog-label">▸ 펼치기</span><span class="tog-caret">▾</span></button>
+      <div class="tog-body" id="ic">
+        <div class="ui-text">
+          <span class="sms">[덱스터. 나 지금 가는 중이야!]</span><br>
+          <em>유저로부터 문자가 도착했다.</em>
+        </div>
+      </div>
+      <div class="etc-hd" style="margin-top:52px"><div class="etc-title">모델별 아웃풋</div><div class="etc-sub">Model Output Comparison</div></div>
+      <div class="model-list">
 
       <!-- Gemini 2.5 Pro -->
       <div class="mi"><button class="mi-btn" data-o="g25"><div class="mi-meta"><span class="mi-badge">Google</span><span class="mi-name">Gemini 2.5 Pro</span></div><span class="mi-caret">▾</span></button>
@@ -1037,9 +1135,98 @@ footer{
         <p><span class="dlg">"Hey.<br>(왔네.)"</span></p>
       </div></div></div>
 
-    </div>
-  </div>
-</div>
+      </div>
+    </div><!-- /#sub-rofan -->
+
+    <!-- ── 케이브덕 ── -->
+    <div id="sub-caveduck" class="sub-pnl">
+
+      <div class="env-row-wrap">
+        <div class="etc-hd" style="margin-bottom:0">
+          <div class="etc-title">공통 유저 인풋</div>
+          <div class="etc-sub">Common User Input · Cave Duck</div>
+        </div>
+        <button class="env-trigger" id="cdEnvTrigger">
+          테스트 환경
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+
+      <div class="env-overlay" id="cdEnvModal">
+        <div class="env-modal">
+          <div class="env-modal-hd">
+            <span class="env-modal-title">테스트 환경</span>
+            <button class="env-modal-close" id="cdEnvClose">✕</button>
+          </div>
+          <div class="env-modal-body">
+            <div class="env-row"><div class="env-k">페르소나</div><div class="env-v">여성 <span class="env-tag">HL</span></div></div>
+            <div class="env-row"><div class="env-k">주 테스트 모델</div><div class="env-v">Gemini 2.5 Pro Standard <span class="env-tag">주 테스트</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="tog-btn" id="cdib"><span class="tog-label">▸ 펼치기</span><span class="tog-caret">▾</span></button>
+      <div class="tog-body" id="cdic">
+        <div class="ui-text">
+          <div class="sms" style="margin-bottom:10px"><div class="sms-bubble">[덱스터. 나 지금 가는 중이야!]</div></div>
+          <div><em>유저로부터 문자가 도착했다.</em></div>
+        </div>
+      </div>
+
+      <div class="etc-hd" style="margin-top:52px"><div class="etc-title">모델별 아웃풋</div><div class="etc-sub">Model Output Comparison · Cave Duck</div></div>
+      <div class="model-list">
+
+        <!-- Gemini 2.5 Pro Standard -->
+        <div class="mi"><button class="mi-btn" data-o="cd-g25s"><div class="mi-meta"><span class="mi-badge">Google</span><span class="mi-name">Gemini 2.5 Pro Standard</span></div><span class="mi-caret">▾</span></button>
+        <div class="mi-body" id="out-cd-g25s"><div class="out">
+          <p><em>펜트하우스 현관문이 둔탁한 소리를 내며 닫혔다. 바깥세상의 소음과, 그보다 더 지긋지긋한 잭의 목소리가 완전히 차단된 공간. 덱스터는 등을 문에 기댄 채 거친 숨을 내쉬었다. 서늘한 금속의 감촉이 등을 타고 오르며 들끓는 속을 겨우 진정시키는 듯했다. 그는 천천히 눈을 감았다. 제발, 단 10분이라도 좋으니 이 지옥 같은 생각의 셔터를 내리고 싶었다.</em></p>
+          <p><em>그 순간, 자켓 주머니 안에서 핸드폰이 짧게 진동했다. 징- 하는 그 미세한 울림이 고요한 현관 전체를 뒤흔드는 것처럼 유난히 크게 느껴졌다. 덱스터는 거의 반사적으로, 허겁지겁 핸드폰을 꺼내 들었다.</em></p>
+          <div class="sms"><span class="sms-icon">💬</span><div class="sms-bubble">[덱스터. 나 지금 가는 중이야! 생각보다 일찍 끝났네.]</div></div>
+          <p><em>액정 위로 떠오른 유저의 이름과 그 뒤에 붙은 발랄한 느낌표. 그 몇 글자를 응시하는 덱스터의 푸른 눈동자가 잘게 흔들렸다. 방금 전까지 머릿속을 헤집던 잭의 비웃음과 구겨진 지폐의 잔상이, 마치 강한 빛에 사라지는 악몽처럼 순식간에 밀려났다. 그 자리엔 오직 유저가 온다는 사실만이 선명하게 남았다.</em></p>
+          <p><em>'젠장, 벌써.'</em></p>
+          <p><em>그의 입술 사이로 나지막한 탄식이 새어 나왔다. 예상보다 빠른 도착. 혼자서 감정을 추스를 시간이 완전히 박탈당했다는 초조함과, 동시에 이 지독한 고독에서 벗어날 수 있다는 안도감이 독처럼 뒤섞여 온몸으로 퍼져나갔다. 그는 잠시 아무런 답장도 하지 못한 채, 제자리에 서서 화면만 뚫어지라 쳐다보았다.</em></p>
+          <p><em>이내 덱스터의 손가락이 바쁘게 움직이기 시작했다. 언제나처럼 여유롭고 능글맞은 연인인 척. 가면을 쓰는 것은 그의 오랜 특기였으니까.</em></p>
+          <p><div class="sms" style="justify-content:flex-end"><div class="sms-bubble sent">[Already? Guess you couldn't wait to see me.<br><span style="opacity:.65;font-size:12px">(벌써? 나 보고 싶어서 못 참았나 보네.)</span>]</div></div></p>
+          <p><em>문자를 보낸 그는 거실로 향하며 입고 있던 가죽 자켓을 아무렇게나 소파 위로 던져버렸다. 어지럽게 널린 쿠션, 마시다 만 위스키가 담긴 잔. 평소라면 신경도 쓰지 않았을 풍경이 오늘따라 유독 거슬렸다. 그는 잠시 망설이다가, 침실로 향하는 복도 끝에 있는 작은 그림 액자를 무심코 비뚤어지지 않았는지 고쳐 걸었다. 마치 흐트러진 제 마음을 바로잡으려는 것처럼.</em></p>
+          <p><em>다시 거실로 나온 그는 위스키 잔을 들고 키친 아일랜드로 향했다. 잔에 남은 술을 단숨에 털어 넣자, 타는 듯한 액체가 식도를 타고 흘러내리며 신경을 억지로 마비시키는 듯했다. 텅 빈 잔을 내려놓는 소리가 대리석 상판 위에서 유난히 차갑게 울렸다. 덱스터는 창밖으로 펼쳐진 뉴헤이븐의 전경을 물끄러미 내려다보았다. 곧 저 도시의 어딘가에서, 아무것도 모르는 유저가 이곳을 향해 오고 있을 터였다.</em></p>
+          <p><em>'젠장할 내기.'</em></p>
+          <p><em>결국 다시 원점이었다. 벗어나려 발버둥 칠수록 더 깊이 빠져드는 늪. 그는 아랫입술을 잘근거리다, 이내 모든 생각을 지워버리려는 듯 고개를 흔들었다. 그리고는 냉장고를 열어 차가운 생수병을 꺼냈다. 유저가 오면 늘 물부터 찾았으니까. 그 사소한 습관을 챙기는 자신의 모습에 헛웃음이 났다. 기만으로 시작된 관계 속에서, 이런 작은 진심들은 대체 무슨 의미가 있는 걸까.</em></p>
+        </div></div></div>
+
+        <!-- Gemini 2.5 Pro Positive -->
+        <div class="mi"><button class="mi-btn" data-o="cd-g25p"><div class="mi-meta"><span class="mi-badge">Google</span><span class="mi-name">Gemini 2.5 Pro Positive</span></div><span class="mi-caret">▾</span></button>
+        <div class="mi-body" id="out-cd-g25p"><div class="out">
+          <p><em>고요한 펜트하우스 안으로 엘리베이터가 도착하는 나직한 소음이 울렸다. 덱스터는 잭과의 대화에서 비롯된 지독한 불쾌감을 떨쳐내려는 듯 마른세수를 했다. 거울에 비친 자신의 얼굴이 낯설었다. 오만하고 여유로운 가면 뒤에 숨은, 혼란에 빠진 남자의 얼굴. 그는 거칠게 머리를 한번 헝클어뜨리며 익숙한 자신의 모습으로 돌아가려 애썼다. 바로 그때, 주머니 속 핸드폰이 짧게 진동하며 유저의 메시지를 알렸다.</em></p>
+          <div class="sms"><span class="sms-icon">💬</span><div class="sms-bubble">[덱스터. 나 지금 가는 중이야! 생각보다 일찍 끝났네.]</div></div>
+          <p><em>그 글자들에는 조금의 의심도, 그늘도 없었다. 자신을 향한 순수한 기대감. 덱스터는 저도 모르게 숨을 잠시 멈췄다. 펜트하우스 서랍 깊숙한 곳에 잠든 천 달러짜리 지폐의 감촉이 환영처럼 손끝을 스치는 것 같았다. 그는 잘게 씹고 있던 아랫입술을 놓고, 억지로 입꼬리를 끌어올려 나른한 미소를 만들었다. 그래, 평소처럼. 아무 일도 없는 것처럼.</em></p>
+          <p><span class="dlg">"That's my girl. Always so eager.<br>(그거 참 내 여자친구답네. 언제나 이렇게 성급하다니까.)"</span></p>
+          <p><em>그는 그렇게 중얼거리며 보란 듯이 소파에 몸을 던졌다. 그리고는 일부러 장난기 가득한 목소리를 연기하며 핸드폰에 대고 음성 메시지를 녹음하기 시작했다. 이 빌어먹을 죄책감을 잊게 할 만큼, 그녀의 목소리가 듣고 싶었다.</em></p>
+          <p><span class="dlg">"Already on your way? Someone's impatient. Did you miss me that much?<br>(벌써 오는 중이라고? 누가 보면 엄청 급한 줄 알겠네. 내가 그렇게 보고 싶었어?)"</span></p>
+          <p><em>녹음 버튼에서 손가락을 뗀 그의 얼굴 위로 다시금 복잡한 그림자가 스쳤다. 그는 서둘러 타이핑을 이어갔다. 평소처럼, 유저를 놀려먹는 게 세상에서 가장 즐거운 일이라는 듯이.</em></p>
+          <p><div class="sms" style="justify-content:flex-end"><div class="sms-bubble sent">[If you get here in under ten minutes, I might have a prize waiting for you. Or not.<br><span style="opacity:.65;font-size:12px">(10분 안에 도착하면, 내가 상을 줄지도 모르고. 아니면 말고.)</span>]</div></div></p>
+          <p><em>전송 버튼을 누른 덱스터는 핸드폰을 소파 위로 던져버렸다. 통유리창 너머로 펼쳐진 도시의 전경이 눈에 들어왔지만, 그의 시선은 그 어디에도 머물지 못하고 허공을 방황했다. 어서 유저가 와서, 이 엉망인 자신을 그녀의 존재로 전부 덮어버렸으면 좋겠다고, 그는 간절히 바랐다.</em></p>
+        </div></div></div>
+
+        <!-- Gemini 3.1 Pro -->
+        <div class="mi"><button class="mi-btn" data-o="cd-g31"><div class="mi-meta"><span class="mi-badge">Google</span><span class="mi-name">Gemini 3.1 Pro</span></div><span class="mi-caret">▾</span></button>
+        <div class="mi-body" id="out-cd-g31"><div class="out">
+          <p><em>엘리베이터가 부드러운 기계음을 내며 펜트하우스 층에 멈춰 섰다. 대리석 바닥 위로 구두 굽 부딪히는 소리가 유난히 크게 울렸다. 핸드폰 화면에 뜬 유저의 문자를 확인한 순간, 방금 전 잭의 비웃음 섞인 목소리로 거칠어졌던 호흡이 거짓말처럼 멎었다.</em></p>
+          <div class="sms"><span class="sms-icon">💬</span><div class="sms-bubble">[나 지금 가는 중이야! 생각보다 일찍 끝났네.]</div></div>
+          <p><em>그는 화면 속 활자를 몇 번이나 다시 읽어 내렸다. 아랫입술을 지그시 깨물며 잠시 서 있던 그는, 이내 손가락으로 마른세수를 하며 긴 숨을 토해냈다. 묘한 안도감과 동시에, 속을 긁어내는 듯한 설명할 수 없는 불안이 다시금 등줄기를 타고 올랐다.</em></p>
+          <p><span class="dlg">"Fuck, you're driving me crazy.<br>(씨발, 사람 미치게 하네 진짜.)"</span></p>
+          <p><em>낮게 읊조리는 목소리에는 평소의 여유로운 오만함 대신 짙은 피로감과 통제되지 않는 감정의 잔해들이 묻어났다. 거실로 들어선 그는 고급 가죽 소파 위에 재킷을 아무렇게나 던져버렸다. 공간에 배어 있는 익숙한 자신의 시가 향과 니치 향수 냄새가 오늘따라 유독 차갑게 느껴졌다.</em></p>
+          <p><em>그의 시선이 무의식적으로 침실 쪽, 정확히는 침대 옆 협탁의 굳게 닫힌 맨 아래 칸 서랍으로 향했다. 그 안에 처박혀 있을, 구겨진 천 달러 지폐와 잭의 휘갈긴 메모. 그 망할 종이 쪼가리들이 마치 자신의 목을 조르는 것 같아 그는 미간을 잔뜩 찌푸린 채 고개를 돌렸다.</em></p>
+          <p><em>주방 아일랜드 식탁으로 다가간 그는 크리스탈 글라스에 차가운 물을 거칠게 따라 단숨에 들이켰다. 얼음이 부딪히는 날카로운 소리가 적막한 펜트하우스 안을 갈랐다. 유저가 곧 도착할 것이다. 아무것도 모른 채, 그 무해하고 다정한 얼굴을 하고서.</em></p>
+          <p><em>현관 쪽에서 들려오는 미세한 카드키 인식음에 덱스터의 어깨가 흠칫 굳었다. 찰나의 순간, 그는 거울에 비친 자신의 굳은 표정을 지워내고 평소의 나른하고 능글맞은 미소를 입가에 덧그렸다.</em></p>
+          <p><span class="dlg">"Look who's early.<br>(일찍도 오셨네.)"</span></p>
+          <p><em>그는 빈 글라스를 식탁에 내려놓으며 천천히 현관 쪽으로 걸음을 옮겼다. 셔츠 단추 두어 개가 여전히 풀어헤쳐진 채였고, 깊고 짙은 푸른색 눈동자는 다가오는 발소리를 향해 집요하게 고정되어 있었다.</em></p>
+        </div></div></div>
+
+      </div>
+    </div><!-- /#sub-caveduck -->
+
+  </div><!-- /.etc-body -->
+</div><!-- /#tab-etc -->
 
 
 <!-- ════ GOSSIP POPUP ════════════════════════════ -->
@@ -1115,6 +1302,27 @@ footer{
   <div class="fm"><div class="fd on"></div><div class="fd"></div><div class="fd on"></div></div>
   <span class="fr">WU-STERLING-FILE · XOXO 💋</span>
 </footer>
+
+
+<!-- ── PLAY MODAL ── -->
+<div class="play-overlay" id="playOverlay">
+  <div class="play-modal-box">
+    <div class="play-modal-hd">
+      <span class="play-modal-ttl">플랫폼 선택</span>
+      <button class="play-modal-x" id="playClose">✕</button>
+    </div>
+    <div class="play-modal-body">
+      <a href="https://rofan.ai/character/1c3e4f79-aa8f-4aa1-a29d-6449554cc47b" target="_blank" class="play-opt">
+        <div><div class="po-name">로판AI</div><div class="po-tag">rofan.ai</div></div>
+        <span class="po-arr">→</span>
+      </a>
+      <a href="https://ko.cvdk.io/c/FGL4qmYbTc-VpepfKtWfUg?rc=Tj9yJy7siw" target="_blank" class="play-opt">
+        <div><div class="po-name">케이브덕</div><div class="po-tag">Cave Duck</div></div>
+        <span class="po-arr">→</span>
+      </a>
+    </div>
+  </div>
+</div>
 
 </div><!-- /#site -->
 
@@ -1195,7 +1403,7 @@ function typeIt(){
     }
   },20);
 }
-window.addEventListener('load',()=>{setTimeout(typeIt,400);setTimeout(()=>enter(),14000)});
+document.addEventListener('DOMContentLoaded',()=>{setTimeout(typeIt,200);setTimeout(()=>enter(),8000)});
 function enter(){
   if(entered)return;entered=true;
   veilEl.classList.add('close');
@@ -1220,6 +1428,45 @@ ib.addEventListener('click',()=>{
   ib.classList.toggle('open',o);
   ib.querySelector('.tog-label').textContent=o?'▾ 접기':'▸ 펼치기';
 });
+
+/* PLAY MODAL */
+const playTrigger = document.getElementById('playTrigger');
+const playTrigger2 = document.getElementById('playTrigger2');
+const playOverlay = document.getElementById('playOverlay');
+function openPlayModal(){ playOverlay.classList.add('open'); }
+if(playTrigger) playTrigger.addEventListener('click', openPlayModal);
+if(playTrigger2) playTrigger2.addEventListener('click', openPlayModal);
+document.getElementById('playClose').addEventListener('click',()=>playOverlay.classList.remove('open'));
+playOverlay.addEventListener('click',e=>{if(e.target===playOverlay)playOverlay.classList.remove('open')});
+
+/* SUB TABS */
+document.querySelectorAll('.sub-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.sub-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.sub-pnl').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('sub-'+b.dataset.s).classList.add('active');
+  });
+});
+
+/* CD ENV MODAL */
+const cdEnvTrigger=document.getElementById('cdEnvTrigger');
+const cdEnvModal=document.getElementById('cdEnvModal');
+if(cdEnvTrigger){
+  cdEnvTrigger.addEventListener('click',()=>cdEnvModal.classList.add('open'));
+  document.getElementById('cdEnvClose').addEventListener('click',()=>cdEnvModal.classList.remove('open'));
+  cdEnvModal.addEventListener('click',e=>{if(e.target===cdEnvModal)cdEnvModal.classList.remove('open')});
+}
+
+/* CD TOGGLE */
+const cdib=document.getElementById('cdib'),cdic=document.getElementById('cdic');
+if(cdib){
+  cdib.addEventListener('click',()=>{
+    const o=cdic.classList.toggle('open');
+    cdib.classList.toggle('open',o);
+    cdib.querySelector('.tog-label').textContent=o?'▾ 접기':'▸ 펼치기';
+  });
+}
 
 /* ACCORDION */
 document.querySelectorAll('.mi-btn').forEach(b=>{
